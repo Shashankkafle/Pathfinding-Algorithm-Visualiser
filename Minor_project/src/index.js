@@ -5,4 +5,6 @@ import Node from './Node'
 import Grid from './Grid'
 
 
+ReactDOM.render(<Grid></Grid>,document.getElementById('root'))
+
 
