@@ -1,6 +1,7 @@
 import React from 'react'
 //import ReactDOM from 'ract-dom'
 import { Component } from 'react'
+import'./node.css'
 export default class Node extends Component {
     render() {
       const {

@@ -2,7 +2,7 @@ import React from 'react'
 import CreateNode from './CreateNode'
 import { Component } from 'react'
 import Node from './Node'
-import '/grid'
+import './grid.css'
 
 export default class Grid extends Component
 {
@@ -21,10 +21,10 @@ export default class Grid extends Component
         return (
           <>
             <button onClick={() => this.visualizeDijkstra()}>
-              Visualize Dijkstra's Algorithm
+              Visualize Dijkstra's Algorithm(currently not working)
             </button>
-            <div className="grid">
-              {grid.map((row, rowIdx) => {
+            <div className="grid">asd 
+              {grid.map((row, rowIdx) => { {console.log(row)}
                 return (
                   <div key={rowIdx}>
                     {row.map((node, nodeIdx) => {
