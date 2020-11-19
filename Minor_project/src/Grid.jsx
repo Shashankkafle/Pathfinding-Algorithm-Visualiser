@@ -13,10 +13,39 @@ export default class Grid extends Component
           grid: [],
           mouseIsPressed: false,
         };
-    }   
+    } 
+    componentDidMount() {
+      const grid = this.getInitialGrid();
+      this.setState({grid});
+    }
+    getInitialGrid = () => {
+      const grid = []
+      for (let row = 0; row < 20; row++) {
+        const temp = [];
+        for (let col = 0; col < 50; col++) {
+          temp[col]=this.createNode(col,row)
+        }
+        grid[row]=temp
+      }
+      return grid;
+    };
+    createNode = (col, row) => {
+      return {
+        col,
+        row,
+        isStart: false,
+        isFinish:  false,
+        //distance: Infinity,
+        //isVisited: false,
+        isWall: false,
+        //previousNode: null,
+      };
+    };
+    
 
     render() {
         const {grid, mouseIsPressed} = this.state;
+        
     
         return (
           <>
@@ -24,7 +53,7 @@ export default class Grid extends Component
               Visualize Dijkstra's Algorithm(currently not working)
             </button>
             <div className="grid">asd 
-              {grid.map((row, rowIdx) => { {console.log(row)}
+              {grid.map((row, rowIdx) => { 
                 return (
                   <div key={rowIdx}>
                     {row.map((node, nodeIdx) => {

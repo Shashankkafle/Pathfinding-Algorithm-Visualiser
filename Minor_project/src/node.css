@@ -1,4 +1,6 @@
 .node
 {
-    color: black;
+    width: 250px;
+    height: 25px;
+    color: rgb(226, 26, 26);
 }
