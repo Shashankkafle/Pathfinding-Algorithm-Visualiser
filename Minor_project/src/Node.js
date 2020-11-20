@@ -1,5 +1,4 @@
 import React from 'react'
-//import ReactDOM from 'ract-dom'
 import { Component } from 'react'
 import'./node.css'
 export default class Node extends Component {
@@ -9,8 +8,8 @@ export default class Node extends Component {
         isFinish,
         isStart,
         isWall,
-        onMouseDown,
-        onMouseEnter,
+        /*onMouseDown,
+        onMouseEnter,*/
         onMouseUp,
         row,
       } = this.props;
@@ -22,14 +21,21 @@ export default class Node extends Component {
         ? 'node-wall'
         : '';
   
-        return (
-          <div
-            id={`node-${row}-${col}`}
-            className={`node ${extraClassName}`}
-            onMouseDown={() => onMouseDown(row, col)}
-            onMouseEnter={() => onMouseEnter(row, col)}
-            onMouseUp={() => onMouseUp()}>asd</div>
-        );
+      return (
+        
+        <div
+          //id={`node-${row}-${col}`}
+          //className="hello"
+          //onMouseDown={() => onMouseDown(row, col)}
+         // onMouseEnter={() => onMouseEnter(row, col)}
+         className='node'
+         
+          onMouseUp={() => onMouseUp()}>
+
+          </div>
+        
+         
+      );
     }
   }
   

@@ -19,9 +19,9 @@ export default class Grid extends Component
     }
     getInitialGrid = () => {
       const grid = []
-      for (let row = 0; row < 5; row++) {
+      for (let row = 0; row < 20; row++) {
         const temp = [];
-        for (let col = 0; col < 5; col++) {
+        for (let col = 0; col < 50; col++) {
           temp[col]=this.createNode(col,row)
         }
         grid[row]=temp
