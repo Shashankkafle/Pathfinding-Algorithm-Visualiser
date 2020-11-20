@@ -1,4 +1,9 @@
 .grid {
-    margin: 100px 0 0;
-    color: black;
-  } 
+ 
+  display: grid;
+  grid-template-columns:repeat( auto-fit, minmax(250px, 1fr) );
+  grid-row-gap: 0px;
+  grid-column-gap: 0px;
+  background-color: #cfdae4;
+  /*padding: 10px; */
+}
