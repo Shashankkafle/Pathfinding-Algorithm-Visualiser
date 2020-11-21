@@ -18,7 +18,7 @@
   
   
   .node-wall{
-    background-color: blue;
+    background-color: rgb(32, 12, 78);
   }
   .node-start:active{
     background-color: chartreuse;

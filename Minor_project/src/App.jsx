@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from './Grid';
 
- const App() => {
+ function App() {
   return (
     <div className="App">
         <Grid></Grid>
@@ -10,3 +10,4 @@ import Grid from './Grid';
 }
 
 export default App;
+
