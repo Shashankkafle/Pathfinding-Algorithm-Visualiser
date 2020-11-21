@@ -1,15 +1,41 @@
-.node {
+.node{
 
-    width: 25px;
-    height: 25px;
-    outline: 1px solid rgb(65, 153, 73);
-    display: inline-block;
+  width: 25px;
+  height: 25px;
+  outline: 1.5px solid rgb(65, 153, 73);
+  display: inline-block;
+  padding: auto;
+  margin-right: 4px;
+} 
+
+.node-start {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(45, 178, 219);
+    border-radius: 50%;
+    border: 2px solid black;
   }
+  
+  
+  .node-wall{
+    background-color: blue;
+  }
+  .node-start:active{
+    background-color: chartreuse;
+
+  } 
   
   .node-finish {
+    width: 20px;
+    height: 20px;
     background-color: rgb(233, 48, 79);
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+
+  .node-finish:hover{
+    background-color: black;
+    opacity: 5;
   }
   
-  .node-start {
-    background-color: rgb(45, 178, 219);
-  }
+  

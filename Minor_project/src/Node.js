@@ -34,4 +34,23 @@ export default class Node extends Component {
       );
     }
   }
+/*var hover{
+    React.createClass(
+      {
+        getInitialState: function()
+      }
+      return{
+        hover: false
+      };
+    );
+  }
+  onMouseEnterHandler: function(){
+    this.setState({
+      hover: true
+    });
+    console.log('enter');
+  }
+  onmouseleaveHandler: function */
+  
+
   
