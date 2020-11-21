@@ -2,7 +2,14 @@
 
     width: 25px;
     height: 25px;
-    outline: 1px solid rgb(9, 124, 212);
+    outline: 1px solid rgb(65, 153, 73);
     display: inline-block;
   }
   
+  .node-finish {
+    background-color: rgb(233, 48, 79);
+  }
+  
+  .node-start {
+    background-color: rgb(45, 178, 219);
+  }
