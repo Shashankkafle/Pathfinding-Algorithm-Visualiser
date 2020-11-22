@@ -77,6 +77,21 @@ export default class Grid extends Component
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
+  generateWall()
+  {
+    const {grid}=this.state
+    for(var i=0;i<grid.length;i++)
+    {
+      for(var j=0;j<grid[i].length;j++)
+      {
+        if((Math.random())<0.3)
+        {
+          grid[i][j].isWall= true
+        }
+      }
+    }
+    this.setState({grid: grid});
+  }
 
   render() {
     
@@ -89,6 +104,7 @@ export default class Grid extends Component
       </button> */}
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
+        
 
         <div className="dropDown"> 
           <button className="dropBtn"><b> Algorithms </b> </button>
@@ -96,9 +112,11 @@ export default class Grid extends Component
 
           <button onClick={() => this.visualizeDijkstra()}>  <a > Dijkstra's Algorithm</a> </button>
            <a > A* Algorithm</a>
+           
           </div>
+          
         </div>
-
+        <button onClick={() => this.generateWall()}>  <a > Generate Walls</a> </button>
         <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
 

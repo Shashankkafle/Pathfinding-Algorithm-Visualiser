@@ -7,36 +7,12 @@
   padding: auto;
   margin-right: 4px;
 } 
-
-.node-start {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(86, 219, 45);
-    border-radius: 50%;
-    border: 2px solid black;
-  }
-  
+ 
   
   .node-wall{
     background-color: rgb(32, 12, 78);
   }
-  .node-start:active{
-    background-color: chartreuse;
-
-  } 
   
-  .node-finish {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(197, 21, 50);
-    border-radius: 50%;
-    border: 2px solid black;
-  }
-
-  .node-finish:hover{
-    background-color: black;
-    opacity: 5;
-  }
   
   .node-visited {
     animation-name: visitedAnimation;
@@ -82,4 +58,27 @@
       transform: scale(1);
       background-color: rgb(255, 254, 106);
     }
+  }
+  .node-start {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(86, 219, 45);
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+  .node-finish {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(197, 21, 50);
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+  .node-start:active{
+    background-color: chartreuse;
+
+  } 
+  
+  .node-finish:hover{
+    background-color: black;
+    opacity: 5;
   }
