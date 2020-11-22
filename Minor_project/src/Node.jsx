@@ -28,29 +28,10 @@ export default class Node extends Component {
           className={`node ${extraClassName}`}
           onMouseDown={() => onMouseDown(row, col)}
           onMouseEnter={() => onMouseEnter(row, col)} 
-          // className='node'
           onMouseUp={() => onMouseUp()}>
         </div> 
       );
     }
   }
-/*var hover{
-    React.createClass(
-      {
-        getInitialState: function()
-      }
-      return{
-        hover: false
-      };
-    );
-  }
-  onMouseEnterHandler: function(){
-    this.setState({
-      hover: true
-    });
-    console.log('enter');
-  }
-  onmouseleaveHandler: function */
-  
 
   

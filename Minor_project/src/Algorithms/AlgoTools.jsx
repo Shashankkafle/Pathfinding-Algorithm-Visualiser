@@ -1,4 +1,5 @@
-export function getAllNodes(grid) {
+ 
+  export function getAllNodes(grid) {
     const nodes = [];
     for (var i=0;i<grid.length;i++) {
       for (var j=0;j<(grid[i].length);j++) {
@@ -17,14 +18,14 @@ export function getAllNodes(grid) {
     if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
     return neighbors.filter(neighbor => !neighbor.isVisited);
   }
-  function updateUnvisitedNeighbors(node, grid) {
+  export function updateUnvisitedNeighbors(node, grid) {
     const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
     for (const neighbor of unvisitedNeighbors) {
       neighbor.distance = node.distance + 1;
       neighbor.previousNode = node;
     }
   }
-  function getNodesInShortestPathOrder(finishNode) {
+  export function getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
     while (currentNode !== null) {

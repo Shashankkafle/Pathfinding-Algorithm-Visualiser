@@ -2,8 +2,8 @@ import React from 'react'
 import { Component } from 'react'
 import Node from './Node.jsx'
 import './grid.css'
-import {getAllNodes} from './Algorithms/AlgoTools'
-
+import {getAllNodes, getNodesInShortestPathOrder} from './Algorithms/AlgoTools'
+import {dijkstra} from './Algorithms/Algorithm';
 
 export default class Grid extends Component
 {
@@ -41,6 +41,41 @@ export default class Grid extends Component
     const {grid} = this.state;
     console.log(grid[0])
     console.log(getAllNodes(grid))
+  }
+
+  animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          this.animateShortestPath(nodesInShortestPathOrder);
+        }, 2 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node node-visited';
+      }, 2 * i);
+    }
+  }
+
+  animateShortestPath(nodesInShortestPathOrder) {
+    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+      setTimeout(() => {
+        const node = nodesInShortestPathOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node node-shortest-path';
+      }, 20 * i);
+    }
+  }
+
+  visualizeDijkstra() {
+    const {grid} = this.state;
+    const startNode = grid[10][15];
+    const finishNode = grid[10][35];
+    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   render() {
