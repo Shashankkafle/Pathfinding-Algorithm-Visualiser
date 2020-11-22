@@ -77,7 +77,39 @@ export default class Grid extends Component
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
-  generateWall()
+  generateWall1()
+  {
+    const {grid}=this.state
+    for(var i=0;i<grid.length;i++)
+    {
+      for(var j=0;j<grid[i].length;j++)
+      {
+        if((Math.random())<0.1)
+        {
+          grid[i][j].isWall= true
+        }
+      }
+    }
+    this.setState({grid: grid});
+  }
+
+  generateWall2()
+  {
+    const {grid}=this.state
+    for(var i=0;i<grid.length;i++)
+    {
+      for(var j=0;j<grid[i].length;j++)
+      {
+        if((Math.random())<0.2)
+        {
+          grid[i][j].isWall= true
+        }
+      }
+    }
+    this.setState({grid: grid});
+  }
+
+  generateWall3()
   {
     const {grid}=this.state
     for(var i=0;i<grid.length;i++)
@@ -93,6 +125,8 @@ export default class Grid extends Component
     this.setState({grid: grid});
   }
 
+
+
   render() {
     
     const {grid, mouseIsPressed} = this.state;
@@ -106,24 +140,23 @@ export default class Grid extends Component
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         
         <div className="dropDown"> 
-          <button className="dropBtn"><b> Algorithms </b> </button>
+          <button className="dropBtn"><b> Algorithms </b></button>
           <div className="dropdown-algo">
-
-          <button onClick={() => this.visualizeDijkstra()}>  <a > Dijkstra's Algorithm</a> </button>
+         <a> <button onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </button> </a>
            <a > A* Algorithm</a>
-           
+           <a > Depth First Search</a>
           </div> 
         </div>
 
         <div className="wall"> 
           <button className="dropWall"><b> Wall </b> </button>
           <div className="dropdown-wall">
-          <button onClick={() => this.generateWall()}>  <a > Pattern 1</a> </button> 
-          </div>
-          
+            <a><button onClick={() => this.generateWall1()}>  <a > Level 1</a> </button> </a>
+            <a><button onClick={() => this.generateWall2()}>  <a > Level 2</a> </button> </a> 
+            <a><button onClick={() => this.generateWall3()}>  <a > Level 3</a> </button> </a>
+          </div> 
         </div>
-        {/* <button onClick={() => this.generateWall()}>  <a > Generate Walls</a> </button> */}
-        <a href="http://localhost:3000/"> <b> Reset</b></a>
+       <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
 
       <div className="grid"> 
