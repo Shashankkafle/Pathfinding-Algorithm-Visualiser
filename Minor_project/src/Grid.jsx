@@ -84,9 +84,24 @@ export default class Grid extends Component
     
     return (
       <>
-      <button onClick={() => this.visualizeDijkstra()}>
+      {/* <button onClick={() => this.visualizeDijkstra()}>
         Visualize Dijkstra's Algorithm(currently not working)
-      </button>
+      </button> */}
+      <div className="navBar">
+        <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
+
+        <div className="dropDown"> 
+          <button className="dropBtn"> Algorithms </button>
+          <div className="dropdown-algo">
+
+          <button onClick={() => this.visualizeDijkstra()}>  <a > Dijkstra's Algorithm</a> </button>
+           <a > A* Algorithm</a>
+          </div>
+        </div>
+
+        <a href="http://localhost:3000/"> <b> Reset</b></a>
+      </div>
+
       <div className="grid"> 
         {grid.map((row, rowIdx) => { 
           return (
