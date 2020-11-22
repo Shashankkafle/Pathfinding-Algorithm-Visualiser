@@ -3,10 +3,10 @@
 
   margin: 100px 0 0; 
   margin-top: 20px; 
+  margin-bottom: 10px;
 }
 
 .navBar{
-  /* display: inline; */
   margin-bottom: 20px; 
   background-color: #333;
   overflow: hidden;  
@@ -20,9 +20,11 @@
   text-decoration: none;
   /* background-color: rgb(93, 155, 117); */
 }
+
 .navBar a:hover{
- background-color: #333 ;
+ background-color: rgb(93, 155, 117);
 }
+
 .dropDown {
   float: left;
   overflow: hidden;
@@ -35,11 +37,14 @@
   font-size: 17px;
   border: none;
   background-color: #333333;
-  /* background-color: rgb(93, 155, 117); */
 }
 
-.navBar a:hover, .dropDown:hover .dropBtn{
+.navBar a:hover  .dropDown:hover {
   background-color: rgb(93, 155, 117);
+}
+
+.dropBtn:hover{
+  background-color: rgb(93, 155, 117); ;
 }
 
 .dropdown-algo {
@@ -47,7 +52,7 @@
   position: absolute;
   background-color: #f1f1f1;
   /* max-width: 150px; */
-  margin-top: 50px;
+  margin-top: 47px;
 }
  
 .dropdown-algo a {
@@ -63,6 +68,50 @@
   background-color: #ddd;
 }
 
-.dropDown:hover .dropdown-algo{
+.dropDown:hover .dropdown-algo {
+  display: block;
+}
+
+.wall {
+  float: left;
+  overflow: hidden;
+}
+ .wall .dropWall{
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 22px;
+  font-size: 17px;
+  border: none;
+  background-color: #333333;
+  /* background-color: rgb(93, 155, 117); */
+}
+
+.dropdown-wall {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  /* max-width: 150px; */
+  margin-top: 47px;
+}
+ 
+.dropdown-wall a {
+  float: none;
+  color: black;
+  padding: 14px 22px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+ 
+}
+.dropdown-wall a:hover{
+  background-color: #ddd;
+}
+
+.wall:hover .dropWall{
+  background-color: rgb(93, 155, 117);
+}
+
+ .wall:hover .dropdown-wall{
   display: block;
 }

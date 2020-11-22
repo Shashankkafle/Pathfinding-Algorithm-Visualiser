@@ -105,7 +105,6 @@ export default class Grid extends Component
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         
-
         <div className="dropDown"> 
           <button className="dropBtn"><b> Algorithms </b> </button>
           <div className="dropdown-algo">
@@ -113,10 +112,17 @@ export default class Grid extends Component
           <button onClick={() => this.visualizeDijkstra()}>  <a > Dijkstra's Algorithm</a> </button>
            <a > A* Algorithm</a>
            
+          </div> 
+        </div>
+
+        <div className="wall"> 
+          <button className="dropWall"><b> Wall </b> </button>
+          <div className="dropdown-wall">
+          <button onClick={() => this.generateWall()}>  <a > Pattern 1</a> </button> 
           </div>
           
         </div>
-        <button onClick={() => this.generateWall()}>  <a > Generate Walls</a> </button>
+        {/* <button onClick={() => this.generateWall()}>  <a > Generate Walls</a> </button> */}
         <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
 
