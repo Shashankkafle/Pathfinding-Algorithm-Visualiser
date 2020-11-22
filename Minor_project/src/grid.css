@@ -4,28 +4,10 @@
   margin: 100px 0 0; 
   margin-top: 20px; 
 }
-/* .algoBtn1{
-  margin-top: 10px;
-  background-color: rgb(240, 227, 227);
-  text-align: center;
-  color: red;
-  padding: 15px 20px; 
-  border-radius: 8px;
-  /* margin-left: -1100px; 
-}
-/*.algoBtn2{
-  margin-top: 10px;
-  background-color: rgb(240, 227, 227);
-  text-align: center;
-  color: red;
-  padding: 15px 20px; 
-  border-radius: 8px;
-  /* margin-left: 10px; */
 
 .navBar{
   /* display: inline; */
   margin-bottom: 20px; 
-   width: auto; 
   background-color: #333;
   overflow: hidden;  
 }
@@ -35,7 +17,8 @@
   color: white;
   text-align: center;
   padding: 14px 22px;
-  background-color: rgb(93, 155, 117);
+  text-decoration: none;
+  /* background-color: rgb(93, 155, 117); */
 }
 .navBar a:hover{
  background-color: #333 ;
@@ -44,35 +27,33 @@
   float: left;
   overflow: hidden;
 }
-.dropDown .dropBtn{
+ .dropDown .dropBtn{
   float: left;
   color: white;
   text-align: center;
   padding: 14px 22px;
   font-size: 17px;
   border: none;
-  background-color: rgb(93, 155, 117);
+  background-color: #333333;
+  /* background-color: rgb(93, 155, 117); */
 }
 
 .navBar a:hover, .dropDown:hover .dropBtn{
-  background-color: rosybrown;
+  background-color: rgb(93, 155, 117);
 }
 
 .dropdown-algo {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  max-width: 150px;
-  
-  margin-top: 55px;
-
+  /* max-width: 150px; */
+  margin-top: 50px;
 }
  
 .dropdown-algo a {
-
   float: none;
   color: black;
-  padding: 12px 16px;
+  padding: 14px 22px;
   text-decoration: none;
   display: block;
   text-align: left;
@@ -84,5 +65,4 @@
 
 .dropDown:hover .dropdown-algo{
   display: block;
- 
 }

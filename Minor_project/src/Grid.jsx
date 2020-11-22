@@ -91,7 +91,7 @@ export default class Grid extends Component
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
 
         <div className="dropDown"> 
-          <button className="dropBtn"> Algorithms </button>
+          <button className="dropBtn"><b> Algorithms </b> </button>
           <div className="dropdown-algo">
 
           <button onClick={() => this.visualizeDijkstra()}>  <a > Dijkstra's Algorithm</a> </button>
