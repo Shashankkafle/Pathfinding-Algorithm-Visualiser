@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import Node from './Node.jsx'
 import './grid.css'
+import {getAllNodes} from './Algorithms/AlgoTools'
 
 
 export default class Grid extends Component
@@ -16,6 +17,7 @@ export default class Grid extends Component
     } 
   componentDidMount() {
     const grid = getInitialGrid();
+    getAllNodes(grid)
     this.setState({grid});
   }
     
@@ -33,6 +35,12 @@ export default class Grid extends Component
 
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
+  }
+  visualizeDijkstra()
+  {
+    const {grid} = this.state;
+    console.log(grid[0])
+    console.log(getAllNodes(grid))
   }
 
   render() {
@@ -92,10 +100,10 @@ const createNode = (col, row) => {
     row,
     isStart: row === 10 && col === 15,
     isFinish: row === 10 && col === 35,
-    //distance: Infinity,
-    //isVisited: false,
+    distance: Infinity,
+    isVisited: false,
     isWall: false,
-    //previousNode: null,
+    previousNode: null,
   };
 };
 
