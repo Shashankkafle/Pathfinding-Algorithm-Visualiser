@@ -1,9 +1,3 @@
-.grid {
-  margin: 100px 0 0; 
-  margin-top: 20px; 
-  margin-bottom: 10px;
-}
-
 .navBar{
   margin-bottom: 20px; 
   background-color: #333;
@@ -20,7 +14,8 @@
 }
 
 .navBar a:hover{
- background-color: rgb(255, 0, 0)
+ /* background-color: rgb(255, 0, 0) */
+ color: rgb(159, 226 ,191);
 }
 
 .dropDown {
@@ -38,9 +33,9 @@
   background-color: #333333;
 }
 
-.dropBtn:hover{
-  background-color: rgb(93, 155, 117); ;
-}
+/* .dropBtn:hover{
+  background-color: rgb(93, 155, 117); ; 
+} */
 
 .dropdown-algo {
   display: none;
@@ -60,7 +55,8 @@
 }
 
 .dropdown-algo a:hover{
-  background-color: #ddd;
+   background-color:  rgb(94, 94, 116);
+   color: black;
 }
 
 .dropDown:hover .dropdown-algo {
@@ -101,12 +97,20 @@
 }
 
 .dropdown-wall a:hover{
-  background-color: #ddd;
+  background-color:  rgb(94, 94, 116);
+   color: black;
 }
 
 .wall:hover .dropdown-wall{
   display: block;
 }
+
+.grid {
+  margin: 100px 0 0; 
+  margin-top: 20px; 
+  margin-bottom: 10px;
+}
+
 
 
 

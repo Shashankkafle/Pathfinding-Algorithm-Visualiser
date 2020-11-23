@@ -133,9 +133,6 @@ export default class Grid extends Component
     
     return (
       <>
-      {/* <button onClick={() => this.visualizeDijkstra()}>
-        Visualize Dijkstra's Algorithm(currently not working)
-      </button> */}
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         
