@@ -1,5 +1,4 @@
 .node{
-
   width: 25px;
   height: 25px;
   outline: 1.5px solid rgb(65, 153, 73);
@@ -7,14 +6,12 @@
   padding: auto;
   margin-right: 4px;
 } 
- 
-  
-  .node-wall{
+
+.node-wall{
     background-color: rgb(32, 12, 78);
   }
-  
-  
-  .node-visited {
+    
+.node-visited {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
@@ -65,6 +62,7 @@
     background-color: rgb(86, 219, 45);
     border-radius: 50%;
     border: 2px solid black;
+    
   }
   .node-finish {
     width: 20px;
@@ -75,7 +73,6 @@
   }
   .node-start:active{
     background-color: chartreuse;
-
   } 
   
   .node-finish:hover{

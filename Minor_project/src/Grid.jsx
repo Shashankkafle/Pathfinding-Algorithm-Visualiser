@@ -140,20 +140,20 @@ export default class Grid extends Component
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         
         <div className="dropDown"> 
-          <button className="dropBtn"><b> Algorithms </b></button>
+          <a className="dropBtn"><b> Algorithms </b></a>
           <div className="dropdown-algo">
-         <a> <button onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </button> </a>
-           <a > A* Algorithm</a>
-           <a > Depth First Search</a>
+          <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
+           <a> A* Algorithm</a>
+           <a> Depth First Search</a>
           </div> 
         </div>
 
         <div className="wall"> 
-          <button className="dropWall"><b> Wall </b> </button>
+          <a className="dropWall"><b> Wall </b> </a>
           <div className="dropdown-wall">
-            <a><button onClick={() => this.generateWall1()}>  <a > Level 1</a> </button> </a>
-            <a><button onClick={() => this.generateWall2()}>  <a > Level 2</a> </button> </a> 
-            <a><button onClick={() => this.generateWall3()}>  <a > Level 3</a> </button> </a>
+            <a onClick={() => this.generateWall1()}>  <a> Level 1</a> </a> 
+            <a onClick={() => this.generateWall2()}>  <a> Level 2</a> </a> 
+            <a onClick={() => this.generateWall3()}>  <a> Level 3</a> </a> 
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
