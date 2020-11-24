@@ -3,7 +3,7 @@ import { Component } from 'react'
 import Node from './Node.jsx'
 import './grid.css'
 import {getAllNodes, getNodesInShortestPathOrder} from './Algorithms/AlgoTools'
-import {dijkstra} from './Algorithms/Algorithm';
+import {dijkstra} from './Algorithms/Dijkstras';
 import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls'
 import {createMaze} from './obstacles/Maze'
 

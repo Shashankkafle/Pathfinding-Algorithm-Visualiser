@@ -1,21 +1,26 @@
 export function createMaze(grid)
     {
         const newGrid=grid
-        for(var i=0;i<newGrid.length;(i=i+2))
+        var row=0
+        for(var col=0;col<newGrid[0].length;col+=2)
         {
-            for(var j=0;j<newGrid[i].length;j++)
+            for( row=0;row<newGrid.length;row++)
             {
                 
                 
-                    newGrid.isWall=true
-                    console.log( newGrid.isWall+' '+i+' '+j)
+                    newGrid[row][col].isWall=true
+                   
                     
             
                 
             }
-            const rand=Math.floor(Math.random()*newGrid[i].length) //generate random num betn 0 and newGrid[i].length
-            newGrid.isWall=false
+            const rand=generateRandomNumber(newGrid.length)
+            newGrid[rand][col].isWall=false
             
         }
         return newGrid
     }
+function generateRandomNumber(max)
+{
+    return(Math.floor(Math.random()*max))
+}
