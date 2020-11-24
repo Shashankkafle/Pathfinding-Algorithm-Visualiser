@@ -3,7 +3,6 @@
     const nodes = [];
     for (var i=0;i<grid.length;i++) {
       for (var j=0;j<(grid[i].length);j++) {
-        console.log("command sucessful")
         nodes.push(grid[i][j]);
       }
     }

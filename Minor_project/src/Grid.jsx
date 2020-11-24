@@ -4,6 +4,8 @@ import Node from './Node.jsx'
 import './grid.css'
 import {getAllNodes, getNodesInShortestPathOrder} from './Algorithms/AlgoTools'
 import {dijkstra} from './Algorithms/Algorithm';
+import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls'
+import {createMaze} from './obstacles/Maze'
 
 export default class Grid extends Component
 {
@@ -35,12 +37,6 @@ export default class Grid extends Component
 
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
-  }
-  visualizeDijkstra()
-  {
-    const {grid} = this.state;
-    console.log(grid[0])
-    console.log(getAllNodes(grid))
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -77,53 +73,7 @@ export default class Grid extends Component
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
-  generateWall1()
-  {
-    const {grid}=this.state
-    for(var i=0;i<grid.length;i++)
-    {
-      for(var j=0;j<grid[i].length;j++)
-      {
-        if((Math.random())<0.1)
-        {
-          grid[i][j].isWall= true
-        }
-      }
-    }
-    this.setState({grid: grid});
-  }
-
-  generateWall2()
-  {
-    const {grid}=this.state
-    for(var i=0;i<grid.length;i++)
-    {
-      for(var j=0;j<grid[i].length;j++)
-      {
-        if((Math.random())<0.2)
-        {
-          grid[i][j].isWall= true
-        }
-      }
-    }
-    this.setState({grid: grid});
-  }
-
-  generateWall3()
-  {
-    const {grid}=this.state
-    for(var i=0;i<grid.length;i++)
-    {
-      for(var j=0;j<grid[i].length;j++)
-      {
-        if((Math.random())<0.3)
-        {
-          grid[i][j].isWall= true
-        }
-      }
-    }
-    this.setState({grid: grid});
-  }
+  
 
 
 
@@ -148,9 +98,41 @@ export default class Grid extends Component
         <div className="wall"> 
           <a className="dropWall"><b> Wall </b> </a>
           <div className="dropdown-wall">
-            <a onClick={() => this.generateWall1()}>  <a> Level 1</a> </a> 
-            <a onClick={() => this.generateWall2()}>  <a> Level 2</a> </a> 
-            <a onClick={() => this.generateWall3()}>  <a> Level 3</a> </a> 
+            <a onClick=
+                        {() => 
+                              { const {grid} = this.state;
+                                const newGrid=generateWall1(grid)
+                                this.setState({grid: newGrid})
+                              }
+                        }
+            >  <a> Level 1</a> </a> 
+           <a onClick=
+                        {() => 
+                              {
+                                const {grid} = this.state;
+                                const newGrid=generateWall2(grid)
+                                this.setState({grid: newGrid})
+                              }
+                        }
+            >  <a> Level 2</a> </a> 
+           <a onClick=
+                        {() => 
+                              {
+                                const {grid} = this.state;
+                                const newGrid=generateWall3(grid)
+                                this.setState({grid: newGrid})
+                              }
+                        }
+            >  <a> Level 3</a> </a> 
+            <a onClick=
+              {()=>
+                  {const {grid} = this.state;
+                  const newGrid=createMaze(grid)
+                  this.setState({grid: newGrid})
+                  
+                  }
+              }
+            >  <a> Generate Maze</a> </a>
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
