@@ -14,8 +14,9 @@ export function createMaze(grid)
             
                 
             }
-            const rand=generateRandomNumber(newGrid.length)
-            newGrid[rand][col].isWall=false
+            
+            newGrid[generateRandomNumber(newGrid.length)][col].isWall=false
+            newGrid[generateRandomNumber(newGrid.length)][col].isWall=false
             
         }
         return newGrid
