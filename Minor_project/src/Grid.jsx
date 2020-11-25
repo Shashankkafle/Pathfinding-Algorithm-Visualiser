@@ -49,18 +49,25 @@ export default class Grid extends Component
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
+        if(!(visitedNodesInOrder[i].isStart||visitedNodesInOrder[i].isFinish))
+        {
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-visited';
+        }
       }, 2 * i);
     }
   }
 
   animateShortestPath(nodesInShortestPathOrder) {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+    for (let i = 0; i < nodesInShortestPathOrder.length; i++) 
+    {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
+        if(!(nodesInShortestPathOrder[i].isStart||nodesInShortestPathOrder[i].isFinish))
+        {
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
+        } 
       }, 20 * i);
     }
   }
