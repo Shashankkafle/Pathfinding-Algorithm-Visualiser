@@ -1,4 +1,4 @@
-import {getAllNodes,updateUnvisitedNeighbors } from './AlgoTools';
+import {getAllNodes,updateUnvisitedNeighbors,sortNodesByDistance } from './AlgoTools';
 
 export function dijkstra(grid, startNode, finishNode) {
     const visitedNodesInOrder = [];
@@ -16,8 +16,6 @@ export function dijkstra(grid, startNode, finishNode) {
     }
   }
 
-  function sortNodesByDistance(unvisitedNodes) {
-    unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
-  }
+  
 
   

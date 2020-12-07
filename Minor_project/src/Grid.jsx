@@ -6,6 +6,7 @@ import {getAllNodes, getNodesInShortestPathOrder} from './Algorithms/AlgoTools'
 import {dijkstra} from './Algorithms/Dijkstras';
 import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls'
 import {createMaze} from './obstacles/Maze'
+import {unweightedSearchAlgorithm} from './Algorithms/BFS';
 
 export default class Grid extends Component
 {
@@ -39,7 +40,8 @@ export default class Grid extends Component
     this.setState({mouseIsPressed: false});
   }
 
-  animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
+    console.log(visitedNodesInOrder)
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -78,11 +80,28 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
-  
 
+  visualizeBfs() {
+    console.log('iwasclicked');
+    const {grid} = this.state;
+    const startNode = grid[10][15];
+    const finishNode = grid[10][35];
+    const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+  }
 
+  // visualizeDfs() {
+  //   console.log('iwasclicked');
+  //   const {grid} = this.state;
+  //   const startNode = grid[10][15];
+  //   const finishNode = grid[10][35];
+  //   const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'dfs');
+  //   const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+  //   this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+  // }
 
   render() {
     
@@ -97,8 +116,9 @@ export default class Grid extends Component
           <a className="dropBtn"><b> Algorithms </b></a>
           <div className="dropdown-algo">
           <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
-           <a> A* Algorithm</a>
-           <a> Depth First Search</a>
+          <a> A* Algorithm</a>
+          <a onClick={() => this.visualizeBfs()}> <a> Bfs algorithm</a> </a>
+          {/* <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a> */}
           </div> 
         </div>
 

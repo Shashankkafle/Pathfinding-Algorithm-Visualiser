@@ -8,7 +8,7 @@
     }
     return nodes;
   }
-  function getUnvisitedNeighbors(node, grid) {
+  export function getUnvisitedNeighbors(node, grid) {
     const neighbors = [];
     const {col, row} = node;
     if (row > 0) neighbors.push(grid[row - 1][col]);
@@ -25,11 +25,16 @@
     }
   }
   export function getNodesInShortestPathOrder(finishNode) {
+    console.log('get it bro')
     const nodesInShortestPathOrder = [];
-  let currentNode = finishNode;
-  while (currentNode !== null) {
-    nodesInShortestPathOrder.unshift(currentNode);
-    currentNode = currentNode.previousNode;
-  }
+    let currentNode = finishNode;
+    while (currentNode !== null) {
+      nodesInShortestPathOrder.unshift(currentNode);
+      currentNode = currentNode.previousNode;
+    }
   return nodesInShortestPathOrder;
+}
+
+export function sortNodesByDistance(unvisitedNodes) {
+  unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
