@@ -11,7 +11,7 @@
   export function getUnvisitedNeighbors(node, grid) {
     const neighbors = [];
     const {col, row} = node;
-    if (row > 0) neighbors.push(grid[row - 1][col]);
+    if (row > 0) {neighbors.push(grid[row - 1][col]); }
     if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
     if (col > 0) neighbors.push(grid[row][col - 1]);
     if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
@@ -24,6 +24,14 @@
       neighbor.previousNode = node;
     }
   }
+  export function updateUnvisitedNeighborsforastar(node, grid) {
+    const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
+    for (const neighbor of unvisitedNeighbors) {
+      
+      neighbor.previousNode = node;
+    }
+    return unvisitedNeighbors
+  }
   export function getNodesInShortestPathOrder(finishNode) {
     console.log('get it bro')
     const nodesInShortestPathOrder = [];
@@ -34,7 +42,17 @@
     }
   return nodesInShortestPathOrder;
 }
-
 export function sortNodesByDistance(unvisitedNodes) {
   unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
+}
+export function findCost(node,finishNode)
+{
+  node.heruistic=getManhattan(node,finishNode)
+    node.cost=node.distance+ node.heruistic
+    
+  
+}
+function getManhattan(node,finishNode)
+{
+  return(Math.abs(finishNode.col-node.col)+Math.abs(finishNode.row-node.row))
 }

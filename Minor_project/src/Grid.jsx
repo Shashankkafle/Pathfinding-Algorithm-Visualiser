@@ -4,6 +4,7 @@ import Node from './Node.jsx'
 import './grid.css'
 import {getAllNodes, getNodesInShortestPathOrder} from './Algorithms/AlgoTools'
 import {dijkstra} from './Algorithms/Dijkstras';
+import {aStar} from './Algorithms/Astar';
 import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls'
 import {createMaze} from './obstacles/Maze'
 import {unweightedSearchAlgorithm} from './Algorithms/BFS';
@@ -41,7 +42,7 @@ export default class Grid extends Component
   }
 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    console.log(visitedNodesInOrder)
+    
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -75,6 +76,7 @@ export default class Grid extends Component
   }
 
   visualizeDijkstra() {
+   
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
@@ -82,6 +84,16 @@ export default class Grid extends Component
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
+  visualizeAstar() {
+   
+    const {grid} = this.state;
+    const startNode = grid[10][15];
+    const finishNode = grid[10][35];
+    const visitedNodesInOrder = aStar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+
 
   visualizeBfs() {
     console.log('iwasclicked');
@@ -116,7 +128,7 @@ export default class Grid extends Component
           <a className="dropBtn"><b> Algorithms </b></a>
           <div className="dropdown-algo">
           <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
-          <a> A* Algorithm</a>
+          <a onClick={() => this.visualizeAstar()}> <a> Astar algorithm</a> </a>
           <a onClick={() => this.visualizeBfs()}> <a> Bfs algorithm</a> </a>
           {/* <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a> */}
           </div> 
