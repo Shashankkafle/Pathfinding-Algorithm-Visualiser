@@ -1,10 +1,10 @@
 .node{
   width: 25px;
   height: 25px;
-  outline: 1.5px solid rgb(65, 153, 73);
+  outline: 1.25px solid rgb(65, 153, 73);
   display: inline-block;
   padding: auto;
-  margin-right: 4px;
+  margin-right: 4px;  
 } 
 
 .node-wall{
@@ -56,6 +56,9 @@
       background-color: rgb(255, 254, 106);
     }
   } */
+
+
+
   .node-start {
     width: 20px;
     height: 20px;
@@ -64,6 +67,7 @@
     border: 2px solid black;
     
   }
+
   .node-finish {
     width: 20px;
     height: 20px;

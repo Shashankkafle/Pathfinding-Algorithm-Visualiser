@@ -124,16 +124,33 @@ export default class Grid extends Component
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         
-        <div className="dropDown"> 
+        {/* <div className="dropDown"> 
           <a className="dropBtn"><b> Algorithms </b></a>
           <div className="dropdown-algo">
           <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
           <a onClick={() => this.visualizeAstar()}> <a> Astar algorithm</a> </a>
           <a onClick={() => this.visualizeBfs()}> <a> Bfs algorithm</a> </a>
-          {/* <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a> */}
+          <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a>
           </div> 
+        </div> 
+     */}
+
+      
+
+
+	<div className="dropDown"> 
+          <label className="dropBtn"><b> Algorithms </b></label>
+          <select className="dropdown-algo" id="dropdown-algo" multiple>
+          <option onClick={() => this.visualizeDijkstra()}> Dijkstra's algorithm </option>
+          <option  onClick={() => this.visualizeAstar()}>  Astar algorithm  </option>
+          <option  onClick={() => this.visualizeBfs()}>  Bfs algorithm  </option>
+          <option  onClick={() => this.visualizeDfs()}>  Dfs algorithm   </option>
+          </select> 
         </div>
 
+
+
+      
         <div className="wall"> 
           <a className="dropWall"><b> Wall </b> </a>
           <div className="dropdown-wall">
