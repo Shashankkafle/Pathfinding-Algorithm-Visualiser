@@ -42,15 +42,12 @@
       
       
       neighbor.previousNode = node;
-      console.log('neighbor')
-      console.log(neighbor)
-      console.log('previousnode')
-      console.log(neighbor.previousNode)
+      
     }
     return unvisitedNeighbors
   }
   export function getNodesInShortestPathOrder(finishNode) {
-    console.log('get it bro')
+    
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
     while (currentNode !== null) {

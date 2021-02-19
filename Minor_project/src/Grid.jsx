@@ -17,8 +17,11 @@ export default class Grid extends Component
         this.state = {
           grid: [],
           mouseIsPressed: false,
+          currentAlgorithm: [],
         };
     } 
+   
+   
   componentDidMount() {
     const grid = getInitialGrid();
     getAllNodes(grid)
@@ -39,6 +42,18 @@ export default class Grid extends Component
 
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
+  }
+  clearGrid(){
+    const {grid}=this.state    
+    for(var i=0;i<grid.length;i++){
+      for(var j=0;j<grid[i].length;j++){
+            
+        grid[i][j].isVisited=false
+        if(!grid[i][j].isStart&&!grid[i][j].isFinish)
+        document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className =
+        'node ';
+      }
+    }
   }
 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -71,7 +86,7 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
         } 
-      }, 20 * i);
+      }, 30 * i);
     }
   }
 
@@ -90,20 +105,53 @@ export default class Grid extends Component
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
-    console.log(visitedNodesInOrder)
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
 
   visualizeBfs() {
-    console.log('iwasclicked');
+    
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+  }
+  selectionfunction(algo){
+    const {currentAlgorithm}= this.state
+    if(!currentAlgorithm.includes(algo)){
+    currentAlgorithm.push(algo)
+   }
+    console.log(currentAlgorithm)
+  }
+  startVisualization(){
+    const {currentAlgorithm}= this.state
+    for(var i=0;i<currentAlgorithm.length;i++){
+      var algo=currentAlgorithm[i]
+      currentAlgorithm.splice(i,1)
+      console.log(currentAlgorithm)
+      if(algo=='dijkstra'){
+        console.log('dijkstra')
+        this.visualizeDijkstra()
+        this.clearGrid()
+      }
+      if(algo=='astar'){
+        console.log('astar')
+        this.visualizeAstar()
+        this.clearGrid()
+      }
+      if(algo=='bfs'){
+        console.log('bfs')
+        this.visualizeBfs()
+        this.clearGrid()
+      }
+
+    }
+
+
   }
 
   // visualizeDfs() {
@@ -124,6 +172,8 @@ export default class Grid extends Component
       <>
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
+        <a>  <button onClick={()=>this.startVisualization()}> Start Visualization </button></a>
+        <a>  <button onClick={()=>this.clearGrid()}> Clear Grid </button></a>
         
         {/* <div className="dropDown"> 
           <a className="dropBtn"><b> Algorithms </b></a>
@@ -138,14 +188,15 @@ export default class Grid extends Component
 
       
 
-
 	<div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
+          
+          
           <select className="dropdown-algo" id="dropdown-algo" multiple>
-          <option onClick={() => this.visualizeDijkstra()}> Dijkstra's algorithm </option>
-          <option  onClick={() => this.visualizeAstar()}>  Astar algorithm  </option>
-          <option  onClick={() => this.visualizeBfs()}>  Bfs algorithm  </option>
-          <option  onClick={() => this.visualizeDfs()}>  Dfs algorithm   </option>
+          <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras'> Dijkstra's algorithm </option> 
+          <option  onClick={()=>this.selectionfunction('astar')} id='astar'>  Astar algorithm  </option>
+          <option  onClick={()=>this.selectionfunction('bfs') }id='bfs'>  Bfs algorithm  </option>
+          <option  onClick={()=>this.selectionfunction('dfs')} id='dfs'>  Dfs algorithm   </option>
           </select> 
         </div>
 

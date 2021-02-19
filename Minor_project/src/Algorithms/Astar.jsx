@@ -29,7 +29,7 @@ export function aStar(grid, startNode, finishNode)
         unvisitedNodes.splice(cheapestIndex,1)
         visitedNodes.push(cheapestNode) 
         if(cheapestNode.isFinish)
-        { console.log(visitedNodes[0])
+        { 
             return(visitedNodes)
         }  
         unvisitedNodes.splice(cheapestIndex,1)  
