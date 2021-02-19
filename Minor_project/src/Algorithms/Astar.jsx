@@ -1,4 +1,4 @@
-import {getAllNodes,getUnvisitedNeighbors,sortNodesByDistance,findCost,updateUnvisitedNeighborsforastar } from "./AlgoTools";
+import {getAllNodes,getUnvisitedNeighborsforAstar,sortNodesByDistance,findCost,updateUnvisitedNeighborsforastar } from "./AlgoTools";
 
 export function aStar(grid, startNode, finishNode)
 {
@@ -31,27 +31,37 @@ export function aStar(grid, startNode, finishNode)
         if(cheapestNode.isFinish)
         { console.log(visitedNodes[0])
             return(visitedNodes)
-        }    
+        }  
+        unvisitedNodes.splice(cheapestIndex,1)  
+        visitedNodes.push(cheapestNode)
+        
        
-        var unvisitedNeighbours=updateUnvisitedNeighborsforastar(cheapestNode,grid)  
+        var unvisitedNeighbours=getUnvisitedNeighborsforAstar(cheapestNode,grid)  
         
         for(var i=0;i<unvisitedNeighbours.length;i++) 
         {          
            
-            if(!visitedNodes.includes(unvisitedNeighbours[i]))
+            if(!visitedNodes.includes(unvisitedNeighbours[i])&&(!unvisitedNeighbours[i].isWall))
             {
                 var tempdist=cheapestNode.distance+1
+                var newPath = false;
                 if(unvisitedNodes.includes(unvisitedNeighbours[i]))
                 {
                     if(tempdist<unvisitedNeighbours[i].distance)
                     {
                         unvisitedNeighbours[i].distance=tempdist
+                        newPath=true
                     }
                 }
                 else
                 {
                     unvisitedNeighbours[i].distance=tempdist
+                    newPath=true
                     unvisitedNodes.push(unvisitedNeighbours[i])
+                }
+                if(newPath){
+                   findCost(unvisitedNeighbours[i],finishNode)
+                   unvisitedNeighbours[i].previousNode= cheapestNode
                 }
                 findCost(unvisitedNeighbours[i],finishNode)
             }

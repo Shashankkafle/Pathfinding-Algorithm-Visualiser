@@ -90,6 +90,7 @@ export default class Grid extends Component
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
+    console.log(visitedNodesInOrder)
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
