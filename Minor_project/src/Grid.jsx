@@ -55,6 +55,9 @@ export default class Grid extends Component
       }
     }
   }
+  showPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
+
+  }
 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     
@@ -95,19 +98,24 @@ export default class Grid extends Component
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
+    var t0=performance.now()
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+    var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    this.showPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
   visualizeAstar() {
    
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
+    var t0=performance.now()
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
+    var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    this.showPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
 
 
@@ -116,9 +124,12 @@ export default class Grid extends Component
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
+    var t0=performance.now()
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
+    var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+    this.showPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
@@ -129,10 +140,12 @@ export default class Grid extends Component
   }
   startVisualization(){
     const {currentAlgorithm}= this.state
-    for(var i=0;i<currentAlgorithm.length;i++){
-      var algo=currentAlgorithm[i]
-      currentAlgorithm.splice(i,1)
-      console.log(currentAlgorithm)
+    console.log(currentAlgorithm)
+    let count=currentAlgorithm.length
+    for(var i=0;i<count;i++){
+      var algo=currentAlgorithm.pop()
+      
+      console.log(algo)
       if(algo=='dijkstra'){
         console.log('dijkstra')
         this.visualizeDijkstra()
