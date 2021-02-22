@@ -18,6 +18,7 @@ export default class Grid extends Component
           grid: [],
           mouseIsPressed: false,
           currentAlgorithm: [],
+          performence:[],
         };
     } 
    
@@ -49,13 +50,44 @@ export default class Grid extends Component
       for(var j=0;j<grid[i].length;j++){
             
         grid[i][j].isVisited=false
-        if(!grid[i][j].isStart&&!grid[i][j].isFinish)
+        if((!grid[i][j].isStart)&&(!grid[i][j].isFinish)&&(!grid[i][j].isWall))
         document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className =
         'node ';
       }
     }
   }
-  showPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
+  recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
+    const {performance}=this.setState
+    if(algo=='dijkstras'){
+    performance[0].algo=algo
+    performance[0].time=time
+    performance[0].shortestPathLength=lengthOfSHortestPath
+    performance[0].numberOfVisitedNodes=numberOfVisited
+    }
+    if(algo=='dijkstras'){
+      performance[0].algo=algo
+      performance[0].time=time
+      performance[0].shortestPathLength=lengthOfSHortestPath
+      performance[0].numberOfVisitedNodes=numberOfVisited
+      }
+    if(algo=='astar'){
+        performance[1].algo=algo
+        performance[1].time=time
+        performance[1].shortestPathLength=lengthOfSHortestPath
+        performance[1].numberOfVisitedNodes=numberOfVisited
+        }
+    if(algo=='bfs'){
+          performance[2].algo=algo
+          performance[2].time=time
+          performance[2].shortestPathLength=lengthOfSHortestPath
+          performance[2].numberOfVisitedNodes=numberOfVisited
+          }
+    if(algo=='dfs'){
+        performance[3].algo=algo
+        performance[3].time=time
+        performance[3].shortestPathLength=lengthOfSHortestPath
+        performance[3].numberOfVisitedNodes=numberOfVisited
+      }      
 
   }
 
@@ -65,7 +97,7 @@ export default class Grid extends Component
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 2 * i);
+        }, 20 * i);
         return;
       }
       setTimeout(() => {
@@ -75,11 +107,11 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-visited';
         }
-      }, 2 * i);
+      }, 20 * i);
     }
   }
 
-  animateShortestPath(nodesInShortestPathOrder) {
+  animateShortestPath(nodesInShortestPathOrder) {console.log(nodesInShortestPathOrder)
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) 
     {
       setTimeout(() => {
@@ -91,6 +123,15 @@ export default class Grid extends Component
         } 
       }, 30 * i);
     }
+   
+    setTimeout(() => {
+      this.clearGrid()
+    }, 20 * 50);
+    setTimeout(() => {
+      this.startVisualization()
+        }, 20 * 60);
+    
+    
   }
 
   visualizeDijkstra() {
@@ -102,8 +143,9 @@ export default class Grid extends Component
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
-    this.showPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
+    this.recordPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
   visualizeAstar() {
    
@@ -114,8 +156,9 @@ export default class Grid extends Component
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
-    this.showPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
+    this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
 
 
@@ -128,8 +171,9 @@ export default class Grid extends Component
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
-    this.showPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
+    this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
@@ -142,27 +186,34 @@ export default class Grid extends Component
     const {currentAlgorithm}= this.state
     console.log(currentAlgorithm)
     let count=currentAlgorithm.length
-    for(var i=0;i<count;i++){
+    //for(var i=0;i<count;i++){
       var algo=currentAlgorithm.pop()
       
-      console.log(algo)
-      if(algo=='dijkstra'){
-        console.log('dijkstra')
+     
+      if(algo=='dijsktras'){
+        console.log('dijkstras')
         this.visualizeDijkstra()
-        this.clearGrid()
+        // setTimeout(() => {
+        //   this.clearGrid()
+        // },50 * 3);
+        
       }
       if(algo=='astar'){
         console.log('astar')
         this.visualizeAstar()
-        this.clearGrid()
+        // setTimeout(() => {
+        //   this.clearGrid()
+        // },50 * 3);
       }
       if(algo=='bfs'){
         console.log('bfs')
         this.visualizeBfs()
-        this.clearGrid()
+        // setTimeout(() => {
+        //   this.clearGrid()
+        // },50 * 3);
       }
 
-    }
+   // }
 
 
   }
