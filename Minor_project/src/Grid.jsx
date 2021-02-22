@@ -18,7 +18,7 @@ export default class Grid extends Component
           grid: [],
           mouseIsPressed: false,
           currentAlgorithm: [],
-          performence:[],
+          performance:[],
         };
     } 
    
@@ -58,37 +58,15 @@ export default class Grid extends Component
   }
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
     const {performance}=this.setState
-    if(algo=='dijkstras'){
-    performance[0].algo=algo
-    performance[0].time=time
-    performance[0].shortestPathLength=lengthOfSHortestPath
-    performance[0].numberOfVisitedNodes=numberOfVisited
-    }
-    if(algo=='dijkstras'){
-      performance[0].algo=algo
-      performance[0].time=time
-      performance[0].shortestPathLength=lengthOfSHortestPath
-      performance[0].numberOfVisitedNodes=numberOfVisited
-      }
-    if(algo=='astar'){
-        performance[1].algo=algo
-        performance[1].time=time
-        performance[1].shortestPathLength=lengthOfSHortestPath
-        performance[1].numberOfVisitedNodes=numberOfVisited
-        }
-    if(algo=='bfs'){
-          performance[2].algo=algo
-          performance[2].time=time
-          performance[2].shortestPathLength=lengthOfSHortestPath
-          performance[2].numberOfVisitedNodes=numberOfVisited
-          }
-    if(algo=='dfs'){
-        performance[3].algo=algo
-        performance[3].time=time
-        performance[3].shortestPathLength=lengthOfSHortestPath
-        performance[3].numberOfVisitedNodes=numberOfVisited
-      }      
-
+   
+    //   var tempPerformance
+    // tempPerformance.algo=algo
+    // tempPerformance.time=time
+    // tempPerformance.shortestPathLength=lengthOfSHortestPath
+    // tempPerformance.numberOfVisitedNodes=numberOfVisited
+    // performance.push(tempPerformance)
+    
+    
   }
 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
