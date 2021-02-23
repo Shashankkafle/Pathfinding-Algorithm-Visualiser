@@ -13,7 +13,6 @@ export function dijkstra(grid, startNode, finishNode) {
       visitedNodesInOrder.push(closestNode);
       if (closestNode === finishNode) return visitedNodesInOrder;
       updateUnvisitedNeighbors(closestNode, grid);
-      
     }
   }
 

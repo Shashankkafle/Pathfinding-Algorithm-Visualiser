@@ -46,7 +46,7 @@
     }
     return unvisitedNeighbors
   }
-  export function getNodesInShortestPathOrder(finishNode) {
+export function getNodesInShortestPathOrder(finishNode) {
     
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;

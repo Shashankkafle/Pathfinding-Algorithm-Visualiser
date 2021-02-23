@@ -8,6 +8,7 @@ import {aStar} from './Algorithms/Astar';
 import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls'
 import {createMaze} from './obstacles/Maze'
 import {unweightedSearchAlgorithm} from './Algorithms/BFS';
+import {dfs} from './Algorithms/DFS';
 
 export default class Grid extends Component
 {
@@ -102,13 +103,12 @@ export default class Grid extends Component
       }, 30 * i);
     }
    
-    setTimeout(() => {
-      this.clearGrid()
-    }, 20 * 50);
-    setTimeout(() => {
-      this.startVisualization()
-        }, 20 * 60);
-    
+    // setTimeout(() => {
+    //   this.clearGrid()
+    // }, 20 * 50);
+    // setTimeout(() => {
+    //   this.startVisualization()
+    //     }, 20 * 60);
     
   }
 
@@ -153,6 +153,17 @@ export default class Grid extends Component
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
+
+  visualizeDfs() {
+    console.log('iwasclicked');
+    const {grid} = this.state;
+    const startNode = grid[10][15];
+    const finishNode = grid[10][35];
+    const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+  }
+
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
     if(!currentAlgorithm.includes(algo)){
@@ -191,20 +202,15 @@ export default class Grid extends Component
         // },50 * 3);
       }
 
-   // }
-
+      if(algo=='dfs'){
+        console.log('dfs')
+        this.visualizeDfs()
+        // setTimeout(() => {
+        //   this.clearGrid()
+        // },50 * 3);
+      }
 
   }
-
-  // visualizeDfs() {
-  //   console.log('iwasclicked');
-  //   const {grid} = this.state;
-  //   const startNode = grid[10][15];
-  //   const finishNode = grid[10][35];
-  //   const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'dfs');
-  //   const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-  //   this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
-  // }
 
   render() {
     
