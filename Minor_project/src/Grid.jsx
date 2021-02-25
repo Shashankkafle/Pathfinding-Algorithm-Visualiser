@@ -71,7 +71,7 @@ export default class Grid extends Component
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+    for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
@@ -90,7 +90,8 @@ export default class Grid extends Component
   }
 
   animateShortestPath(nodesInShortestPathOrder) {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) 
+    let j = 0
+    for (let i=0; i < nodesInShortestPathOrder.length; i++) 
     {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
@@ -100,13 +101,14 @@ export default class Grid extends Component
           'node node-shortest-path';
         } 
       }, 30 * i);
+      j++
     }
     setTimeout(() => {
      this.clearGrid()
-    }, 20 * 60);
+    }, 20 * j*2);
     setTimeout(() => {
       this.startVisualization()
-        }, 20 * 60);
+        }, 20 * j*2);
     
   }
 
