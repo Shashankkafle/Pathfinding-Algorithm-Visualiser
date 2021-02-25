@@ -102,7 +102,7 @@ export default class Grid extends Component
       }, 30 * i);
     }
     setTimeout(() => {
-      this.clearGrid()
+     this.clearGrid()
     }, 20 * 60);
     setTimeout(() => {
       this.startVisualization()
@@ -343,7 +343,7 @@ const createNode = (col, row) => {
     col,
     row,
     isStart: row === 10 && col === 15,
-    isFinish: row === 10 && col === 35,
+    isFinish: row === 10&& col === 35,
     distance: Infinity,
     isVisited: false,
     isWall: false,

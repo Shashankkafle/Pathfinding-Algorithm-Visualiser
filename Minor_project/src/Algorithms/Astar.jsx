@@ -1,51 +1,34 @@
-import {getAllNodes,getUnvisitedNeighborsforAstar,sortNodesByDistance,findCost,updateUnvisitedNeighborsforastar } from "./AlgoTools";
-
+import {getUnvisitedNeighborsforAstar,findCost } from "./AlgoTools";
 export function aStar(grid, startNode, finishNode)
-{
-   
-    startNode.distance = 0;
+{   startNode.distance = 0;
     startNode.cost = 0
-
     var unvisitedNodes=[]
-
     var visitedNodes=[] 
     unvisitedNodes.push(startNode)
-   
-   
-
     while(unvisitedNodes.length>0)
     {      var cheapestIndex=0,cheapestNode=unvisitedNodes[0]         
-        console.log('unvisitedNodes')
-        console.log(unvisitedNodes) 
-        console.log('visitedNodes')
-        console.log(visitedNodes)         
-
          for(var i=0;i<unvisitedNodes.length;i++) 
         { 
             if(unvisitedNodes[i].cost<cheapestNode.cost)
-            { 
-                
+            {      
                 cheapestIndex=i
             }
         }
-       
         cheapestNode=unvisitedNodes[cheapestIndex]
-        unvisitedNodes.splice(cheapestIndex,1)
-        visitedNodes.push(cheapestNode) 
         if(cheapestNode.isFinish)
         { 
             return(visitedNodes)
         }  
         unvisitedNodes.splice(cheapestIndex,1)  
         visitedNodes.push(cheapestNode)
-        
-       
-        var unvisitedNeighbours=getUnvisitedNeighborsforAstar(cheapestNode,grid)  
-        
+        var unvisitedNeighbours=getUnvisitedNeighborsforAstar(cheapestNode,grid) 
+        console.log('Node')
+        console.log(cheapestNode)
+        console.log('Neighbours') 
+        console.log(unvisitedNeighbours)
         for(var i=0;i<unvisitedNeighbours.length;i++) 
         {          
-           
-            if(!visitedNodes.includes(unvisitedNeighbours[i])&&(!unvisitedNeighbours[i].isWall))
+            if(!visitedNodes.includes(unvisitedNeighbours[i]))
             {
                 var tempdist=cheapestNode.distance+1
                 var newPath = false;
@@ -68,13 +51,9 @@ export function aStar(grid, startNode, finishNode)
                    unvisitedNeighbours[i].previousNode= cheapestNode
                 }
                 findCost(unvisitedNeighbours[i],finishNode)
-            }
-           
-        }
-        
-       
-        
-          
+            } 
+        }      
     }
+    console.log('no solution');
     return null
 }
