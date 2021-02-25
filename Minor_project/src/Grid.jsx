@@ -222,8 +222,8 @@ export default class Grid extends Component
       <>
       <div className="navBar">
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
-        <a>  <button onClick={()=>this.startVisualization()}> Start Visualization </button></a>
-        <a>  <button onClick={()=>this.clearGrid()}> Clear Grid </button></a>
+        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Start Visualization </b> </button></a>
+        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
         
         {/* <div className="dropDown"> 
           <a className="dropBtn"><b> Algorithms </b></a>
@@ -243,10 +243,10 @@ export default class Grid extends Component
           
           
           <select className="dropdown-algo" id="dropdown-algo" multiple>
-          <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras'> Dijkstra's algorithm </option> 
-          <option  onClick={()=>this.selectionfunction('astar')} id='astar'>  Astar algorithm  </option>
-          <option  onClick={()=>this.selectionfunction('bfs') }id='bfs'>  Bfs algorithm  </option>
-          <option  onClick={()=>this.selectionfunction('dfs')} id='dfs'>  Dfs algorithm   </option>
+          <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras' className="algoBar"> Dijkstra's algorithm </option> 
+          <option  onClick={()=>this.selectionfunction('astar')} id='astar' className="algoBar">  Astar algorithm  </option>
+          <option  onClick={()=>this.selectionfunction('bfs') }id='bfs' className="algoBar">  Bfs algorithm  </option>
+          <option  onClick={()=>this.selectionfunction('dfs')} id='dfs'className="algoBar" >  Dfs algorithm   </option>
           </select> 
         </div>
 
