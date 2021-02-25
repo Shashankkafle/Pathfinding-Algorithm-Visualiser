@@ -45,7 +45,7 @@ export default class Grid extends Component
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
   }
-  clearGrid(){
+  clearGrid(){ 
     const {grid}=this.state    
     for(var i=0;i<grid.length;i++){
       for(var j=0;j<grid[i].length;j++){
@@ -58,18 +58,17 @@ export default class Grid extends Component
     }
   }
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
-    const {performance}=this.setState
+    const {performance}=this.state
+    var tempPerformance = new Object();
+    tempPerformance.algorithm=algo
+    tempPerformance.time=time
+    tempPerformance.shortestPathLength=lengthOfSHortestPath
+    tempPerformance.numberOfVisitedNodes=numberOfVisited
+    performance.push(tempPerformance)
+    console.log(performance)
    
-    //   var tempPerformance
-    // tempPerformance.algo=algo
-    // tempPerformance.time=time
-    // tempPerformance.shortestPathLength=lengthOfSHortestPath
-    // tempPerformance.numberOfVisitedNodes=numberOfVisited
-    // performance.push(tempPerformance)
-    
-    
   }
-
+ 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
@@ -90,7 +89,7 @@ export default class Grid extends Component
     }
   }
 
-  animateShortestPath(nodesInShortestPathOrder) {console.log(nodesInShortestPathOrder)
+  animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) 
     {
       setTimeout(() => {
@@ -102,13 +101,12 @@ export default class Grid extends Component
         } 
       }, 30 * i);
     }
-   
-    // setTimeout(() => {
-    //   this.clearGrid()
-    // }, 20 * 50);
-    // setTimeout(() => {
-    //   this.startVisualization()
-    //     }, 20 * 60);
+    setTimeout(() => {
+      this.clearGrid()
+    }, 20 * 60);
+    setTimeout(() => {
+      this.startVisualization()
+        }, 20 * 60);
     
   }
 
@@ -133,6 +131,7 @@ export default class Grid extends Component
     var t0=performance.now()
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     var t1=performance.now()
+    console.log(visitedNodesInOrder)
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -177,6 +176,9 @@ export default class Grid extends Component
     let count=currentAlgorithm.length
     //for(var i=0;i<count;i++){
       var algo=currentAlgorithm.pop()
+      if(currentAlgorithm.length==0){
+        
+      }
       
      
       if(algo=='dijsktras'){
@@ -359,4 +361,11 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   newGrid[row][col] = newNode;
   return newGrid;
 };
-
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}

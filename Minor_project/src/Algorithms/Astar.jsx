@@ -15,7 +15,11 @@ export function aStar(grid, startNode, finishNode)
 
     while(unvisitedNodes.length>0)
     {      var cheapestIndex=0,cheapestNode=unvisitedNodes[0]         
-       
+        console.log('unvisitedNodes')
+        console.log(unvisitedNodes) 
+        console.log('visitedNodes')
+        console.log(visitedNodes)         
+
          for(var i=0;i<unvisitedNodes.length;i++) 
         { 
             if(unvisitedNodes[i].cost<cheapestNode.cost)

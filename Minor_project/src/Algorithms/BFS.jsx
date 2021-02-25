@@ -1,6 +1,6 @@
 
 export function unweightedSearchAlgorithm(grid,startNode,finishNode,name) {
-  console.log(name);
+ 
   const queue = [];
   queue.push(startNode);
   while(queue.length > 0) {
@@ -9,9 +9,7 @@ export function unweightedSearchAlgorithm(grid,startNode,finishNode,name) {
     //   currentNode = queue.shift();
     // }
     currentNode = queue.shift();
-    console.log('currentNode')
-    
-    console.log(currentNode)
+   
     // else{
     //   currentNode = queue.pop();
     // }
@@ -26,8 +24,6 @@ export function unweightedSearchAlgorithm(grid,startNode,finishNode,name) {
       return queue;
     }
     let edges = getUnvisitedNeighbors(currentNode, grid, name);
-    console.log('edges')
-    console.log(edges)
     for (let i = 0; i < edges.length; i++){
       let neighbor = edges[i];
       if(!neighbor.isVisited) {
