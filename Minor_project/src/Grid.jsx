@@ -9,6 +9,7 @@ import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls
 import {createMaze} from './obstacles/Maze'
 import {unweightedSearchAlgorithm} from './Algorithms/BFS';
 import {dfs} from './Algorithms/DFS';
+import {Table} from 'react-bootstrap';
 
 export default class Grid extends Component
 {
@@ -57,16 +58,50 @@ export default class Grid extends Component
       }
     }
   }
+
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
-    const {performance}=this.state
+    const {performance}=this.state;
     var tempPerformance = new Object();
-    tempPerformance.algorithm=algo
-    tempPerformance.time=time
-    tempPerformance.shortestPathLength=lengthOfSHortestPath
-    tempPerformance.numberOfVisitedNodes=numberOfVisited
-    performance.push(tempPerformance)
-    console.log(performance)
+    tempPerformance.algorithm=algo;
+    tempPerformance.time=time;
+    tempPerformance.shortestPathLength=lengthOfSHortestPath;
+    tempPerformance.numberOfVisitedNodes=numberOfVisited;
+    performance.push(tempPerformance);
+    // console.log('performance');
+    // console.log(performance);
+  }
+
+  displayPerformance(){
+    const {performance} = this.state;
+    const {currentAlgorithm}= this.state
+    // console.log(currentAlgorithm)
+    // console.log(currentAlgorithm.length);
+ 
+    // let time = performance[0].time.toString();
+    // let algorithm = performance[0].algorithm;
+    // let distance = performance[0].shortestPathLength.toString();
+
    
+    document.getElementById('algorithm').innerHTML= 'algorithm' ;
+    document.getElementById('time').innerHTML= 'time';
+    document.getElementById('distance').innerHTML = 'distance';
+
+    // document.getElementById('name0').innerHTML= algorithm ;
+    // document.getElementById('time0').innerHTML= time;
+    // document.getElementById('distance0').innerHTML = distance;
+    console.log(performance);
+    for(let i=0;i<=3;i++){
+      console.log(i);
+
+      let time = performance[i].time.toString();
+      let algorithm = performance[i].algorithm;
+      let distance = performance[i].shortestPathLength.toString();
+      
+      document.getElementById('name'+i).innerHTML= algorithm ;
+      document.getElementById('time'+i).innerHTML= time;
+      document.getElementById('distance'+i).innerHTML = distance;
+      
+    }
   }
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -101,7 +136,7 @@ export default class Grid extends Component
           'node node-shortest-path';
         } 
       }, 30 * i);
-      j++
+      j++;
     }
     setTimeout(() => {
      this.clearGrid()
@@ -121,7 +156,7 @@ export default class Grid extends Component
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log(nodesInShortestPathOrder)
+    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     this.recordPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -133,9 +168,9 @@ export default class Grid extends Component
     var t0=performance.now()
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     var t1=performance.now()
-    console.log(visitedNodesInOrder)
+    // console.log(visitedNodesInOrder)
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log(nodesInShortestPathOrder)
+    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -150,19 +185,22 @@ export default class Grid extends Component
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log(nodesInShortestPathOrder)
+    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
 
   visualizeDfs() {
-    console.log('iwasclicked');
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
+    var t0=performance.now()
     const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
+    var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
+    this.recordPerofrmence('dfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
 
   selectionfunction(algo){
@@ -170,21 +208,18 @@ export default class Grid extends Component
     if(!currentAlgorithm.includes(algo)){
     currentAlgorithm.push(algo)
    }
-    console.log(currentAlgorithm)
+    // console.log(currentAlgorithm)
   }
+
   startVisualization(){
-    const {currentAlgorithm}= this.state
-    console.log(currentAlgorithm)
-    let count=currentAlgorithm.length
-    //for(var i=0;i<count;i++){
+      const {currentAlgorithm}= this.state
+      // console.log('hu na bhai');
+      // console.log(currentAlgorithm)
+      // console.log(currentAlgorithm.length);
       var algo=currentAlgorithm.pop()
-      if(currentAlgorithm.length==0){
-        
-      }
-      
-     
+    
       if(algo=='dijsktras'){
-        console.log('dijkstras')
+        // console.log('dijkstras')
         this.visualizeDijkstra()
         // setTimeout(() => {
         //   this.clearGrid()
@@ -192,14 +227,14 @@ export default class Grid extends Component
         
       }
       if(algo=='astar'){
-        console.log('astar')
+        // console.log('astar')
         this.visualizeAstar()
         // setTimeout(() => {
         //   this.clearGrid()
         // },50 * 3);
       }
       if(algo=='bfs'){
-        console.log('bfs')
+        // console.log('bfs')
         this.visualizeBfs()
         // setTimeout(() => {
         //   this.clearGrid()
@@ -207,11 +242,15 @@ export default class Grid extends Component
       }
 
       if(algo=='dfs'){
-        console.log('dfs')
+        // console.log('dfs')
         this.visualizeDfs()
         // setTimeout(() => {
         //   this.clearGrid()
         // },50 * 3);
+      }
+
+      if(currentAlgorithm.length === 0){
+        this.displayPerformance();
       }
 
   }
@@ -226,7 +265,7 @@ export default class Grid extends Component
         <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
         <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Start Visualization </b> </button></a>
         <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
-        
+        {/* <a>  <button onClick={()=>this.displayPerformance()} className="newTools"> <b> performance </b> </button></a> */}
         {/* <div className="dropDown"> 
           <a className="dropBtn"><b> Algorithms </b></a>
           <div className="dropdown-algo">
@@ -238,9 +277,7 @@ export default class Grid extends Component
         </div> 
      */}
 
-      
-
-	<div className="dropDown"> 
+	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
           
           
@@ -297,6 +334,38 @@ export default class Grid extends Component
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th id='algorithm'></th>
+            <th id='time'></th>
+            <th id='distance'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id='name0'></td>
+            <td id='time0'></td>
+            <td id='distance0'></td>
+          </tr>
+          <tr>
+            <td id='name1'></td>
+            <td id='time1'></td>
+            <td id='distance1'></td>
+          </tr>
+          <tr>
+            <td id='name2'></td>
+            <td id='time2'></td>
+            <td id='distance2'></td>
+          </tr>
+          <tr>
+            <td id='name3'></td>
+            <td id='time3'></td>
+            <td id='distance3'></td>
+          </tr>
+        </tbody>
+      </Table>
 
       <div className="grid"> 
         {grid.map((row, rowIdx) => { 
