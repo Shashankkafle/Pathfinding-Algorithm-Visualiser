@@ -104,14 +104,16 @@ export default class Grid extends Component
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
-    this.setState({
-      numberOfAlgos:0 
-    })
+  
   }
- clearCurrentData(){
-  const {numberOfAlgos}= this.state
+  clearData(){
+    // this.setState({
+    //   numberOfAlgos:0 
+    // })
+    
+  }
 
- }
+ 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     // if(visitedNodesInOrder==null){
     //   throw(noPathError)
@@ -218,6 +220,8 @@ export default class Grid extends Component
         numberOfAlgos:numberOfAlgos+1
       })
     currentAlgorithm.push(algo)
+    this.clearData()
+
    }
   }
   
@@ -370,7 +374,7 @@ export default class Grid extends Component
           </tr>
         </tbody>
       </Table>
-      <div id='currentAlgo'>asd</div>
+      <div id='currentAlgo'></div>
 
 
       <div className="grid"> 
