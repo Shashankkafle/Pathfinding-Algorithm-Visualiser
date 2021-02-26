@@ -51,14 +51,6 @@ function getUnvisitedNeighbors(node, grid, name) {
     }
   }
 
-  if (col < grid[0].length - 1) {
-    if (name === "bfs") {
-      neighbors.push(grid[row][col + 1]);
-    } else {
-      neighbors.unshift(grid[row][col + 1]);
-    }
-  }
-
   if (row < grid.length - 1) {
     if (name === "bfs") {
       neighbors.push(grid[row + 1][col]);
@@ -75,13 +67,13 @@ function getUnvisitedNeighbors(node, grid, name) {
     }
   } 
 
-  // if (col < grid[0].length - 1) {
-  //   if (name === "bfs") {
-  //     neighbors.push(grid[row][col + 1]);
-  //   } else {
-  //     neighbors.unshift(grid[row][col + 1]);
-  //   }
-  // }
+  if (col < grid[0].length - 1) {
+    if (name === "bfs") {
+      neighbors.push(grid[row][col + 1]);
+    } else {
+      neighbors.unshift(grid[row][col + 1]);
+    }
+  }
   return neighbors.filter(neighbor => !neighbor.isVisited);
 }
                         

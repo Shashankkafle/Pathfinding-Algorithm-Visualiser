@@ -1,4 +1,5 @@
 import {getUnvisitedNeighborsforAstar,findCost } from "./AlgoTools";
+
 export function aStar(grid, startNode, finishNode)
 {   startNode.distance = 0;
     startNode.cost = 0
@@ -22,10 +23,7 @@ export function aStar(grid, startNode, finishNode)
         unvisitedNodes.splice(cheapestIndex,1)  
         visitedNodes.push(cheapestNode)
         var unvisitedNeighbours=getUnvisitedNeighborsforAstar(cheapestNode,grid) 
-        console.log('Node')
-        console.log(cheapestNode)
-        console.log('Neighbours') 
-        console.log(unvisitedNeighbours)
+      
         for(var i=0;i<unvisitedNeighbours.length;i++) 
         {          
             if(!visitedNodes.includes(unvisitedNeighbours[i]))
@@ -54,6 +52,5 @@ export function aStar(grid, startNode, finishNode)
             } 
         }      
     }
-    console.log('no solution');
     return null
 }
