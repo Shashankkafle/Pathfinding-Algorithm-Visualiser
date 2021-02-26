@@ -57,6 +57,18 @@ export default class Grid extends Component
       }
     }
   }
+  clearWalls(){ 
+    const {grid}=this.state    
+    for(var i=0;i<grid.length;i++){
+      for(var j=0;j<grid[i].length;j++){
+            
+        grid[i][j].isVisited=false
+        if((!grid[i][j].isStart)&&(!grid[i][j].isFinish))
+        document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className =
+        'node ';
+      }
+    }
+  }
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
     const {performance}=this.state
     var tempPerformance = new Object();
@@ -70,7 +82,11 @@ export default class Grid extends Component
   }
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    
+    if(visitedNodesInOrder==null){
+      throw(noPathError)
+      this.clearWalls()
+      this.startVisualization()
+    }
     for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -149,6 +165,7 @@ export default class Grid extends Component
     var t0=performance.now()
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
     var t1=performance.now()
+    
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
