@@ -72,6 +72,7 @@ export default class Grid extends Component
   }
 
   displayPerformance(){
+    
     const {performance} = this.state;
     const {currentAlgorithm}= this.state
     // console.log(currentAlgorithm)
@@ -183,9 +184,12 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
+    // console.log('visitedNodesInOrder');
+    // console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log(nodesInShortestPathOrder)
+    // console.log('nodesInShortestPathOrder');
+    // console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -196,9 +200,12 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
+    console.log('visitedNodesInOrder');
+    console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log(nodesInShortestPathOrder)
+    console.log('nodesInShortestPathOrder');
+    console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('dfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
