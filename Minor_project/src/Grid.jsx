@@ -102,7 +102,7 @@ export default class Grid extends Component
       shrotestDistance[i]= document.getElementById('distance'+i)
       numberOfNodes[i]=document.getElementById('visitedNodes'+i)
       name[i].innerHTML= performance[i].algorithm;;
-      time[i].innerHTML= performance[i].time.toString();
+      time[i].innerHTML= performance[i].time.toString() +' ms';
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
@@ -209,7 +209,7 @@ export default class Grid extends Component
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     var t0=performance.now()
-    const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
+    const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
@@ -246,7 +246,7 @@ export default class Grid extends Component
       
      var currentAlgo= document.getElementById('currentAlgo')
      if(algo!=undefined){
-     currentAlgo.innerHTML=algo
+     currentAlgo.innerHTML= 'Current Algorithm: '+ ' ' + algo;
      }
      else{
       currentAlgo.innerHTML=''

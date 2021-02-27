@@ -1,79 +1,80 @@
 
-export function unweightedSearchAlgorithm(grid,startNode,finishNode,name) {
- 
+export function unweightedSearchAlgorithm(grid, startNode, finishNode) {
   const queue = [];
+  const visitedNodesInOrder = [];
+
+  startNode.isVisited = true;
   queue.push(startNode);
-  while(queue.length > 0) {
-    let currentNode;
-    // if(name === 'bfs'){
-    //   currentNode = queue.shift();
-    // }
-    currentNode = queue.shift();
-   
-    // else{
-    //   currentNode = queue.pop();
-    // }
-    if(currentNode.isWall) continue;
-    
-    // if(name === 'bfs'){
-    //   queue.push(currentNode);
-    // }
-    queue.push(currentNode);
-    currentNode.isVisited = true;
-    if(currentNode === finishNode) {
-      return queue;
-    }
-    let edges = getUnvisitedNeighbors(currentNode, grid, name);
-    for (let i = 0; i < edges.length; i++){
-      let neighbor = edges[i];
-      if(!neighbor.isVisited) {
-        neighbor.isVisited = true;
-        neighbor.previousNode = currentNode;
-        queue.push(neighbor);
+
+  while (queue.length > 0) {
+      let node = queue.shift();
+
+      if (finishNode === node)
+          return visitedNodesInOrder;
+
+      if (node.isWall) continue;
+
+      const neighbors = getUnvisitedNeighbors(grid, node);
+
+      for (let i = 0; i < neighbors.length; i++) {
+          let neighbor = neighbors[i];
+          neighbor.isVisited = true;
+          neighbor.previousNode = node;
+          visitedNodesInOrder.push(neighbor);
+          queue.push(neighbor);
       }
-    } 
-    // console.log('queue')
-    // console.log(queue.length)
-    //     console.log(queue)
   }
-  return queue;
+
+  return visitedNodesInOrder;
 }
 
-function getUnvisitedNeighbors(node, grid, name) {
+function  getUnvisitedNeighbors(grid, node) {
+  const ROWS = grid.length;
+  const COLS = grid[0].length;
+
+  const { row, col } = node;
   const neighbors = [];
-  const {col, row} = node;
 
-  if (row > 0) {
-    if (name === "bfs") {
-      neighbors.push(grid[row - 1][col]);
-    } else {
-      neighbors.unshift(grid[row - 1][col]);
-    }
-  }
-
-  if (row < grid.length - 1) {
-    if (name === "bfs") {
+  if (
+      row + 1 >= 0 &&
+      row + 1 < ROWS &&
+      col >= 0 &&
+      col < COLS &&
+      !grid[row + 1][col].isVisited &&
+      !grid[row + 1][col].isWall
+  ) {
       neighbors.push(grid[row + 1][col]);
-    } else {
-      neighbors.unshift(grid[row + 1][col]);
-    }
-  } 
-
-  if (col > 0) {
-    if (name === "bfs") {
-      neighbors.push(grid[row][col - 1]);
-    } else {
-      neighbors.unshift(grid[row][col - 1]);
-    }
-  } 
-
-  if (col < grid[0].length - 1) {
-    if (name === "bfs") {
-      neighbors.push(grid[row][col + 1]);
-    } else {
-      neighbors.unshift(grid[row][col + 1]);
-    }
   }
-  return neighbors.filter(neighbor => !neighbor.isVisited);
+  if (
+      row - 1 >= 0 &&
+      row - 1 < ROWS &&
+      col >= 0 &&
+      col < COLS &&
+      !grid[row - 1][col].isWall &&
+      !grid[row - 1][col].isVisited
+  ) {
+      neighbors.push(grid[row - 1][col]);
+  }
+  if (
+      row >= 0 &&
+      row < ROWS &&
+      col - 1 >= 0 &&
+      col - 1 < COLS &&
+      !grid[row][col - 1].isWall &&
+      !grid[row][col - 1].isVisited
+  ) {
+      neighbors.push(grid[row][col - 1]);
+  }
+  if (
+      row >= 0 &&
+      row < ROWS &&
+      col + 1 >= 0 &&
+      col + 1 < COLS &&
+      !grid[row][col + 1].isWall &&
+      !grid[row][col + 1].isVisited
+  ) {
+      neighbors.push(grid[row][col + 1]);
+  }
+
+  return neighbors;
 }
-                        

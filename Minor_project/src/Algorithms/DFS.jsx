@@ -1,56 +1,89 @@
-export function dfs(grid,startNode,finishNode) {
 
-    const queue = [];
-    queue.push(startNode);
-    while(queue.length > 0) {
-      let currentNode;
-      currentNode = queue.pop();
-    //   if(currentNode.isWall) continue;
-    //  queue.push(currentNode);
+export function dfs(grid, startNode, finishNode) {
+  const stack = [];
+  const visitedNodesInOrder = [];
+
+  startNode.isVisited = true;
+  stack.push(startNode);
+
+  while (stack.length > 0) {
+      let currentNode = stack.pop();
+
       currentNode.isVisited = true;
-      if(currentNode.isWall) continue;
-      if(currentNode === finishNode) {
-        return queue;
+
+      if (finishNode === currentNode){
+        return visitedNodesInOrder;
       }
-     // console.log('currentNode')
-     // console.log(currentNode)
-      let edges = getUnvisitedNeighbors(currentNode, grid);
-      /////console.log('edges')
-      ////console.log(edges)
-      for (let i = 0; i < edges.length; i++){
-        let neighbor = edges[i];
-        if(!neighbor.isVisited) {
-        //neighbor.isVisited = true;
-          if(neighbor.isWall) continue;
+
+      if (currentNode.isWall) continue;
+
+      let neighbors = getUnvisitedNeighbors(grid, currentNode);
+      
+      for (let i = 0; i < neighbors.length; i++) {
+        let neighbor = neighbors[i];
+        if(!neighbor.isVisited){
           neighbor.previousNode = currentNode;
-          queue.push(neighbor);    
+          visitedNodesInOrder.push(neighbor);
+          stack.push(neighbor);
         }
-      } 
-    }
-    return queue;
+      }
+  }
+  return visitedNodesInOrder;
 }
-  
-function getUnvisitedNeighbors(node, grid) {
-    const neighbors = [];
-    const {col, row} = node;
-  
-    if (row > 0) {
-        //console.log(0)
+
+function getUnvisitedNeighbors(grid, node) {
+  const ROWS = grid.length;
+  const COLS = grid[0].length;
+
+  const { row, col } = node;
+  const neighbors = [];
+
+  if (
+    row - 1 >= 0 &&
+    row - 1 < ROWS &&
+    col >= 0 &&
+    col < COLS &&
+    !grid[row - 1][col].isWall &&
+    !grid[row - 1][col].isVisited
+  ) {
         neighbors.unshift(grid[row - 1][col]);
-    }//up
-    if (col < grid[0].length - 1) {
-        //console.log(3)
-        neighbors.unshift(grid[row][col + 1]);
-    }//right
-    if (row < grid.length - 1) {
-      // console.log(1)
-       neighbors.unshift(grid[row + 1][col]);
-    }//down 
-    if (col > 0) {
-        ////console.log(2)
-        neighbors.unshift(grid[row][col - 1]);
-    }//left 
-    return neighbors.filter(neighbor => !neighbor.isVisited);
+  }
+  
+  if (
+    row >= 0 &&
+    row < ROWS &&
+    col + 1 >= 0 &&
+    col + 1 < COLS &&
+    !grid[row][col + 1].isWall &&
+    !grid[row][col + 1].isVisited
+  ) {
+    neighbors.unshift(grid[row][col + 1]);
+  }
+
+  if (
+      row + 1 >= 0 &&
+      row + 1 < ROWS &&
+      col >= 0 &&
+      col < COLS &&
+      !grid[row + 1][col].isVisited &&
+      !grid[row + 1][col].isWall
+  ) {
+      neighbors.unshift(grid[row + 1][col]);
+  }
+ 
+  if (
+      row >= 0 &&
+      row < ROWS &&
+      col - 1 >= 0 &&
+      col - 1 < COLS &&
+      !grid[row][col - 1].isWall &&
+      !grid[row][col - 1].isVisited
+  ) {
+      neighbors.unshift(grid[row][col - 1]);
+  }
+  
+
+  return neighbors;
 }
                           
   
