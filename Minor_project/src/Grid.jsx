@@ -9,7 +9,7 @@ import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls
 import {createMaze} from './obstacles/Maze'
 import {unweightedSearchAlgorithm} from './Algorithms/BFS';
 import {dfs} from './Algorithms/DFS';
-import {Table} from 'react-bootstrap';
+import Table from 'react-bootstrap/Table'
 
 export default class Grid extends Component
 {
@@ -21,6 +21,7 @@ export default class Grid extends Component
           mouseIsPressed: false,
           currentAlgorithm: [],
           performance:[],
+          numberOfAlgos:0,
         };
     } 
    
@@ -31,7 +32,7 @@ export default class Grid extends Component
     this.setState({grid});
   }
     
-    
+  
   handleMouseDown(row, col) {
     const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
     this.setState({grid: newGrid, mouseIsPressed: true});
@@ -58,7 +59,18 @@ export default class Grid extends Component
       }
     }
   }
-
+  clearWalls(){ 
+    const {grid}=this.state    
+    for(var i=0;i<grid.length;i++){
+      for(var j=0;j<grid[i].length;j++){
+            
+        grid[i][j].isVisited=false
+        if((!grid[i][j].isStart)&&(!grid[i][j].isFinish))
+        document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className =
+        'node ';
+      }
+    }
+  }
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
     const {performance}=this.state;
     var tempPerformance = new Object();
@@ -67,46 +79,47 @@ export default class Grid extends Component
     tempPerformance.shortestPathLength=lengthOfSHortestPath;
     tempPerformance.numberOfVisitedNodes=numberOfVisited;
     performance.push(tempPerformance);
-    // console.log('performance');
-    // console.log(performance);
+   
   }
 
   displayPerformance(){
     
     const {performance} = this.state;
-    const {currentAlgorithm}= this.state
-    // console.log(currentAlgorithm)
-    // console.log(currentAlgorithm.length);
- 
-    // let time = performance[0].time.toString();
-    // let algorithm = performance[0].algorithm;
-    // let distance = performance[0].shortestPathLength.toString();
-
-   
-    document.getElementById('algorithm').innerHTML= 'algorithm' ;
-    document.getElementById('time').innerHTML= 'time';
-    document.getElementById('distance').innerHTML = 'distance';
-
-    // document.getElementById('name0').innerHTML= algorithm ;
-    // document.getElementById('time0').innerHTML= time;
-    // document.getElementById('distance0').innerHTML = distance;
-    console.log(performance);
-    for(let i=0;i<=3;i++){
-      console.log(i);
-
-      let time = performance[i].time.toString();
-      let algorithm = performance[i].algorithm;
-      let distance = performance[i].shortestPathLength.toString();
-      
-      document.getElementById('name'+i).innerHTML= algorithm ;
-      document.getElementById('time'+i).innerHTML= time;
-      document.getElementById('distance'+i).innerHTML = distance;
-      
+    const {numberOfAlgos}= this.state
+    var colName=document.getElementById('algorithm')
+    var colTime=document.getElementById('time')
+    var colShortestDistance = document.getElementById('distance')
+    var colNumberOfVisited= document.getElementById('visitedNodes')
+    colName.innerHTML= 'algorithm' ;
+    colTime.innerHTML= 'time';
+    colShortestDistance.innerHTML = 'Shortest Path Length'
+    colNumberOfVisited.innerHTML='Number Of Visited Nodes'
+    var name=[],time=[],shrotestDistance=[],numberOfNodes=[];
+    for(let i=0;i<numberOfAlgos;i++){
+      name[i]=document.getElementById('name'+i)
+      time[i]=document.getElementById('time'+i)
+      shrotestDistance[i]= document.getElementById('distance'+i)
+      numberOfNodes[i]=document.getElementById('visitedNodes'+i)
+      name[i].innerHTML= performance[i].algorithm;;
+      time[i].innerHTML= performance[i].time.toString();
+      shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
+      numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
   }
+  clearData(){
+    // this.setState({
+    //   numberOfAlgos:0 
+    // })
+    
+  }
+
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    
+    // if(visitedNodesInOrder==null){
+    //   throw(noPathError)
+    //   this.clearWalls()
+    //   this.startVisualization()
+    // }
     for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -157,7 +170,6 @@ export default class Grid extends Component
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     this.recordPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -169,9 +181,7 @@ export default class Grid extends Component
     var t0=performance.now()
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     var t1=performance.now()
-    // console.log(visitedNodesInOrder)
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log(nodesInShortestPathOrder)
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -212,54 +222,48 @@ export default class Grid extends Component
 
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
+    const {numberOfAlgos}= this.state
     if(!currentAlgorithm.includes(algo)){
+      this.setState({
+        numberOfAlgos:numberOfAlgos+1
+      })
     currentAlgorithm.push(algo)
-   }
-    // console.log(currentAlgorithm)
-  }
+    this.clearData()
 
+   }
+  }
+  
   startVisualization(){
       const {currentAlgorithm}= this.state
-      // console.log('hu na bhai');
-      // console.log(currentAlgorithm)
-      // console.log(currentAlgorithm.length);
       var algo=currentAlgorithm.pop()
-    
+     var currentAlgo= document.getElementById('currentAlgo')
+     if(algo!=undefined){
+     currentAlgo.innerHTML=algo
+     }
+     else{
+      currentAlgo.innerHTML=''
+     }
+
       if(algo=='dijsktras'){
-        // console.log('dijkstras')
-        this.visualizeDijkstra()
-        // setTimeout(() => {
-        //   this.clearGrid()
-        // },50 * 3);
         
+        this.visualizeDijkstra()        
       }
       if(algo=='astar'){
-        // console.log('astar')
+       
         this.visualizeAstar()
-        // setTimeout(() => {
-        //   this.clearGrid()
-        // },50 * 3);
       }
       if(algo=='bfs'){
-        // console.log('bfs')
         this.visualizeBfs()
-        // setTimeout(() => {
-        //   this.clearGrid()
-        // },50 * 3);
       }
 
       if(algo=='dfs'){
-        // console.log('dfs')
         this.visualizeDfs()
-        // setTimeout(() => {
-        //   this.clearGrid()
-        // },50 * 3);
       }
 
       if(currentAlgorithm.length === 0){
+      
         this.displayPerformance();
       }
-
   }
 
   render() {
@@ -269,25 +273,11 @@ export default class Grid extends Component
     return (
       <>
       <div className="navBar">
-        <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
-        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Start Visualization </b> </button></a>
-        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
-        {/* <a>  <button onClick={()=>this.displayPerformance()} className="newTools"> <b> performance </b> </button></a> */}
-        {/* <div className="dropDown"> 
-          <a className="dropBtn"><b> Algorithms </b></a>
-          <div className="dropdown-algo">
-          <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
-          <a onClick={() => this.visualizeAstar()}> <a> Astar algorithm</a> </a>
-          <a onClick={() => this.visualizeBfs()}> <a> Bfs algorithm</a> </a>
-          <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a>
-          </div> 
-        </div> 
-     */}
-
+        <a href="http://localhost:3000/" className='onlyLeft'>  <b> Pathfinding Visualizer </b></a>
+        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Visualize!</b> </button></a>
+        
 	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
-          
-          
           <select className="dropdown-algo" id="dropdown-algo" multiple>
           <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras' className="algoBar"> Dijkstra's algorithm </option> 
           <option  onClick={()=>this.selectionfunction('astar')} id='astar' className="algoBar">  Astar algorithm  </option>
@@ -296,9 +286,8 @@ export default class Grid extends Component
           </select> 
         </div>
 
+        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
 
-
-      
         <div className="wall"> 
           <a className="dropWall"><b> Wall </b> </a>
           <div className="dropdown-wall">
@@ -342,12 +331,13 @@ export default class Grid extends Component
        <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
 
-      <Table striped bordered hover>
+      <Table class="center">
         <thead>
           <tr>
             <th id='algorithm'></th>
             <th id='time'></th>
             <th id='distance'></th>
+            <th id='visitedNodes'></th>
           </tr>
         </thead>
         <tbody>
@@ -355,24 +345,31 @@ export default class Grid extends Component
             <td id='name0'></td>
             <td id='time0'></td>
             <td id='distance0'></td>
+            <td id='visitedNodes0'></td>
           </tr>
           <tr>
             <td id='name1'></td>
             <td id='time1'></td>
             <td id='distance1'></td>
+            <td id='visitedNodes1'></td>
           </tr>
           <tr>
             <td id='name2'></td>
             <td id='time2'></td>
             <td id='distance2'></td>
+            <td id='visitedNodes2'></td>
           </tr>
           <tr>
             <td id='name3'></td>
             <td id='time3'></td>
             <td id='distance3'></td>
+            <td id='visitedNodes3'></td>
           </tr>
         </tbody>
       </Table>
+
+      <div id='currentAlgo'></div>
+
 
       <div className="grid"> 
         {grid.map((row, rowIdx) => { 
