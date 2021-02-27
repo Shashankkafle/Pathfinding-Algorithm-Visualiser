@@ -107,10 +107,9 @@ export default class Grid extends Component
     }
   }
   clearData(){
-    // this.setState({
-    //   numberOfAlgos:0 
-    // })
-    
+    const {numberOfAlgos}= this.state
+    this.setState({numberOfAlgos: false});
+    console.log(numberOfAlgos)
   }
 
  
@@ -215,19 +214,23 @@ export default class Grid extends Component
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
     const {numberOfAlgos}= this.state
+    if(currentAlgorithm.length==0)
+    {
+      this.clearData()
+    }
     if(!currentAlgorithm.includes(algo)){
-      this.setState({
-        numberOfAlgos:numberOfAlgos+1
-      })
     currentAlgorithm.push(algo)
-    this.clearData()
-
+    this.setState({
+      numberOfAlgos:numberOfAlgos+1
+    })
    }
   }
   
   startVisualization(){
       const {currentAlgorithm}= this.state
+      
       var algo=currentAlgorithm.pop()
+      
      var currentAlgo= document.getElementById('currentAlgo')
      if(algo!=undefined){
      currentAlgo.innerHTML= 'Current Algorithm: '+ ' ' + algo;
