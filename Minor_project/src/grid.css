@@ -1,4 +1,7 @@
-
+ul, li{
+  list-style:none;
+  list-style-type:none;
+}
 
 .grid {
   margin: 100px 0 0; 

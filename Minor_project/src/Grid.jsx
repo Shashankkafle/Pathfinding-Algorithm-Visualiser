@@ -65,6 +65,7 @@ export default class Grid extends Component
       for(var j=0;j<grid[i].length;j++){
             
         grid[i][j].isVisited=false
+        grid[i][j].isWall=false
         if((!grid[i][j].isStart)&&(!grid[i][j].isFinish))
         document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className =
         'node ';
@@ -106,10 +107,29 @@ export default class Grid extends Component
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
   }
-  clearData(){
+  showComparison(){
+    const {performance} = this.state;
     const {numberOfAlgos}= this.state
-    this.setState({numberOfAlgos: false});
-    console.log(numberOfAlgos)
+    var tempPerformance=performance
+    tempPerformance.sort((a,b)=>{
+      return(a.time>b.time) ? 1:-1
+    })
+    document.getElementById('timelist').innerHTML='Algorithms ordered based on time:'
+    for(let i=0;i<numberOfAlgos;i++){
+      console.log(i)
+     document.getElementById('timerow'+i).innerHTML=tempPerformance[i].algorithm    
+    }
+    tempPerformance.sort((a,b)=>{
+      return(a.numberOfVisitedNodes>b.numberOfVisitedNodes) ? 1:-1
+    })
+    
+    document.getElementById('spacelist').innerHTML='Algorithms ordered based on space:'
+    for(let i=0;i<numberOfAlgos;i++){
+      document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm   
+
+     }   
+      
+    
   }
 
  
@@ -161,7 +181,6 @@ export default class Grid extends Component
   }
 
   visualizeDijkstra() {
-   
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
@@ -173,7 +192,6 @@ export default class Grid extends Component
     this.recordPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
   visualizeAstar() {
-   
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
@@ -182,23 +200,18 @@ export default class Grid extends Component
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
-    this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
+    this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length+1,nodesInShortestPathOrder.length)
   }
 
 
-  visualizeBfs() {
-    
+  visualizeBfs() { 
     const {grid} = this.state;
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
-    // console.log('visitedNodesInOrder');
-    // console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log('nodesInShortestPathOrder');
-    // console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -209,12 +222,8 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
-    console.log('visitedNodesInOrder');
-    console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log('nodesInShortestPathOrder');
-    console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('dfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -222,10 +231,6 @@ export default class Grid extends Component
   selectionfunction(algo){
     const {currentAlgorithm}= this.state
     const {numberOfAlgos}= this.state
-    if(currentAlgorithm.length==0)
-    {
-      this.clearData()
-    }
     if(!currentAlgorithm.includes(algo)){
     currentAlgorithm.push(algo)
     this.setState({
@@ -278,6 +283,7 @@ export default class Grid extends Component
       <div className="navBar">
         <a href="http://localhost:3000/" className='onlyLeft'>  <b> Pathfinding Visualizer </b></a>
         <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Visualize!</b> </button></a>
+       
         
 	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
@@ -332,44 +338,60 @@ export default class Grid extends Component
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
+       <a>  <button onClick={()=> this.showComparison()}>Show Comparison</button></a>
       </div>
 
-      <Table class="center">
-        <thead>
-          <tr>
-            <th id='algorithm'></th>
-            <th id='time'></th>
-            <th id='distance'></th>
-            <th id='visitedNodes'></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id='name0'></td>
-            <td id='time0'></td>
-            <td id='distance0'></td>
-            <td id='visitedNodes0'></td>
-          </tr>
-          <tr>
-            <td id='name1'></td>
-            <td id='time1'></td>
-            <td id='distance1'></td>
-            <td id='visitedNodes1'></td>
-          </tr>
-          <tr>
-            <td id='name2'></td>
-            <td id='time2'></td>
-            <td id='distance2'></td>
-            <td id='visitedNodes2'></td>
-          </tr>
-          <tr>
-            <td id='name3'></td>
-            <td id='time3'></td>
-            <td id='distance3'></td>
-            <td id='visitedNodes3'></td>
-          </tr>
-        </tbody>
-      </Table>
+     <div id='tableContainer'> 
+      <ul > <div id='timelist'></div>
+        <li id='timerow0'></li>
+        <li id='timerow1'></li>
+        <li id='timerow2'></li>
+        <li id='timerow3'></li>
+       </ul> 
+       <ul > <div id='spacelist'></div>
+        <li id='spacerow0'></li>
+        <li id='spacerow1'></li>
+        <li id='spacerow2'></li>
+        <li id='spacerow3'></li>
+       </ul>         
+         
+        <Table class="center">
+          <thead>
+            <tr>
+              <th id='algorithm'></th>
+              <th id='time'></th>
+              <th id='distance'></th>
+              <th id='visitedNodes'></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id='name0'></td>
+              <td id='time0'></td>
+              <td id='distance0'></td>
+              <td id='visitedNodes0'></td>
+            </tr>
+            <tr>
+              <td id='name1'></td>
+              <td id='time1'></td>
+              <td id='distance1'></td>
+              <td id='visitedNodes1'></td>
+            </tr>
+            <tr>
+              <td id='name2'></td>
+              <td id='time2'></td>
+              <td id='distance2'></td>
+              <td id='visitedNodes2'></td>
+            </tr>
+            <tr>
+              <td id='name3'></td>
+              <td id='time3'></td>
+              <td id='distance3'></td>
+              <td id='visitedNodes3'></td>
+            </tr>
+          </tbody>
+        </Table>
+      </div> 
 
       <div id='currentAlgo'></div>
 
