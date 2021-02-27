@@ -101,7 +101,7 @@ export default class Grid extends Component
       shrotestDistance[i]= document.getElementById('distance'+i)
       numberOfNodes[i]=document.getElementById('visitedNodes'+i)
       name[i].innerHTML= performance[i].algorithm;;
-      time[i].innerHTML= performance[i].time.toString();
+      time[i].innerHTML= performance[i].time.toString() +' ms';
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
@@ -193,13 +193,9 @@ export default class Grid extends Component
     const startNode = grid[10][15];
     const finishNode = grid[10][35];
     var t0=performance.now()
-    const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
-    // console.log('visitedNodesInOrder');
-    // console.log(visitedNodesInOrder);
+    const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    // console.log('nodesInShortestPathOrder');
-    // console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -210,12 +206,8 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
-    console.log('visitedNodesInOrder');
-    console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    console.log('nodesInShortestPathOrder');
-    console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('dfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -238,7 +230,7 @@ export default class Grid extends Component
       var algo=currentAlgorithm.pop()
      var currentAlgo= document.getElementById('currentAlgo')
      if(algo!=undefined){
-     currentAlgo.innerHTML=algo
+     currentAlgo.innerHTML= 'Current Algorithm: '+ ' ' + algo;
      }
      else{
       currentAlgo.innerHTML=''
