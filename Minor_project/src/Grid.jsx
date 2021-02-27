@@ -9,7 +9,7 @@ import {generateWall1,generateWall2,generateWall3} from './obstacles/RandomWalls
 import {createMaze} from './obstacles/Maze'
 import {unweightedSearchAlgorithm} from './Algorithms/BFS';
 import {dfs} from './Algorithms/DFS';
-import {Table} from 'react-bootstrap';
+import Table from 'react-bootstrap/Table'
 
 export default class Grid extends Component
 {
@@ -83,11 +83,12 @@ export default class Grid extends Component
   }
 
   displayPerformance(){
+    
     const {performance} = this.state;
     const {numberOfAlgos}= this.state
     var colName=document.getElementById('algorithm')
     var colTime=document.getElementById('time')
-   var colShortestDistance = document.getElementById('distance')
+    var colShortestDistance = document.getElementById('distance')
     var colNumberOfVisited= document.getElementById('visitedNodes')
     colName.innerHTML= 'algorithm' ;
     colTime.innerHTML= 'time';
@@ -104,7 +105,6 @@ export default class Grid extends Component
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
-  
   }
   clearData(){
     const {numberOfAlgos}= this.state
@@ -193,8 +193,12 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  unweightedSearchAlgorithm(grid, startNode, finishNode,'bfs');
+    // console.log('visitedNodesInOrder');
+    // console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    // console.log('nodesInShortestPathOrder');
+    // console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('bfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -205,8 +209,12 @@ export default class Grid extends Component
     const finishNode = grid[10][35];
     var t0=performance.now()
     const visitedNodesInOrder =  dfs(grid, startNode, finishNode);
+    console.log('visitedNodesInOrder');
+    console.log(visitedNodesInOrder);
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    console.log('nodesInShortestPathOrder');
+    console.log(nodesInShortestPathOrder);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);  
     this.recordPerofrmence('dfs',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
@@ -268,25 +276,11 @@ export default class Grid extends Component
     return (
       <>
       <div className="navBar">
-        <a href="http://localhost:3000/">  <b> Pathfinding Visualizer </b></a>
-        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Start Visualization </b> </button></a>
-        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
-        {/* <a>  <button onClick={()=>this.displayPerformance()} className="newTools"> <b> performance </b> </button></a> */}
-        {/* <div className="dropDown"> 
-          <a className="dropBtn"><b> Algorithms </b></a>
-          <div className="dropdown-algo">
-          <a onClick={() => this.visualizeDijkstra()}> <a> Dijkstra's algorithm</a> </a>
-          <a onClick={() => this.visualizeAstar()}> <a> Astar algorithm</a> </a>
-          <a onClick={() => this.visualizeBfs()}> <a> Bfs algorithm</a> </a>
-          <a onClick={() => this.visualizeDfs()}> <a> Dfs algorithm</a> </a>
-          </div> 
-        </div> 
-     */}
-
+        <a href="http://localhost:3000/" className='onlyLeft'>  <b> Pathfinding Visualizer </b></a>
+        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Visualize!</b> </button></a>
+        
 	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
-          
-          
           <select className="dropdown-algo" id="dropdown-algo" multiple>
           <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras' className="algoBar"> Dijkstra's algorithm </option> 
           <option  onClick={()=>this.selectionfunction('astar')} id='astar' className="algoBar">  Astar algorithm  </option>
@@ -295,9 +289,8 @@ export default class Grid extends Component
           </select> 
         </div>
 
+        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
 
-
-      
         <div className="wall"> 
           <a className="dropWall"><b> Wall </b> </a>
           <div className="dropdown-wall">
@@ -340,7 +333,8 @@ export default class Grid extends Component
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
       </div>
-      <Table striped bordered hover>
+
+      <Table class="center">
         <thead>
           <tr>
             <th id='algorithm'></th>
@@ -355,7 +349,6 @@ export default class Grid extends Component
             <td id='time0'></td>
             <td id='distance0'></td>
             <td id='visitedNodes0'></td>
-
           </tr>
           <tr>
             <td id='name1'></td>
@@ -377,6 +370,7 @@ export default class Grid extends Component
           </tr>
         </tbody>
       </Table>
+
       <div id='currentAlgo'></div>
 
 
