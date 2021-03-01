@@ -106,6 +106,7 @@ export default class Grid extends Component
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
+    this.showComparison()
   }
   showComparison(){
     const {performance} = this.state;
@@ -338,17 +339,16 @@ export default class Grid extends Component
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
-       <a>  <button onClick={()=> this.showComparison()}>Show Comparison</button></a>
       </div>
 
-     <div id='tableContainer'> 
-      <ul > <div id='timelist'></div>
+     <div className='dataContainer'> 
+      <ul className='dataContainer' > <div id='timelist'></div>
         <li id='timerow0'></li>
         <li id='timerow1'></li>
         <li id='timerow2'></li>
         <li id='timerow3'></li>
        </ul> 
-       <ul > <div id='spacelist'></div>
+       <ul className='dataContainer'> <div id='spacelist'></div>
         <li id='spacerow0'></li>
         <li id='spacerow1'></li>
         <li id='spacerow2'></li>

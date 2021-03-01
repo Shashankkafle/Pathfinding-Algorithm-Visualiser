@@ -11,7 +11,7 @@ ul, li{
 
 
 table, th, td {
-  border-collapse: collapse;
+ border-collapse: collapse; 
 }
 
 table {
@@ -67,7 +67,8 @@ table tr:nth-child(odd){
 
 .navBar .onlyLeft {
 
-  margin-right: 700px;
+  margin-right: 550px;
+  font-size: 28px;
 }
 
 .dropDown {
@@ -180,12 +181,12 @@ table tr:nth-child(odd){
   background-color:  rgb(94, 94, 116);
    color: black;
 }
+.dataContainer{
+  border:black;
+  border-width: 5px;
+  margin: 5px;
 
-
-
-
-
-
+}
 
 .newTools
 {
@@ -198,12 +199,14 @@ table tr:nth-child(odd){
   background-color: #333333;
   margin-left: -20px;  
  cursor: pointer;
+  
 }
   
 .newTools :hover
 {
-  background-color: #333;
-  color: rgb(159, 226 ,191);
+  background-color: rgb(141, 126, 126);
+  padding: 10px 20px;
+  /* color: rgb(159, 226 ,191); */
 }
 
 #currentAlgo {
