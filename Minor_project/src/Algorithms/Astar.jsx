@@ -17,7 +17,7 @@ export function aStar(grid, startNode, finishNode)
         }
         cheapestNode=unvisitedNodes[cheapestIndex]
         if(cheapestNode.isFinish)
-        { 
+        { visitedNodes.push(finishNode)
             return(visitedNodes)
         }  
         unvisitedNodes.splice(cheapestIndex,1)  
@@ -52,5 +52,7 @@ export function aStar(grid, startNode, finishNode)
             } 
         }      
     }
-    return null
+   
+    return visitedNodes
+    
 }

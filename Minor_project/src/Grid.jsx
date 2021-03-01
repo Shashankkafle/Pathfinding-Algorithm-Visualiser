@@ -22,6 +22,7 @@ export default class Grid extends Component
           currentAlgorithm: [],
           performance:[],
           numberOfAlgos:0,
+          disabledStart:true,
         };
     } 
    
@@ -106,40 +107,49 @@ export default class Grid extends Component
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
+    // document.getElementById('analysisContainer').style.display = 'block';
+
+    this.showComparison();
+
   }
 
-  // showComparison(){
-  //   const {performance} = this.state;
-  //   const {numberOfAlgos}= this.state
-  //   var tempPerformance=performance
-  //   tempPerformance.sort((a,b)=>{
-  //     return(a.time>b.time) ? 1:-1
-  //   })
-  //   document.getElementById('timelist').innerHTML='Algorithms ordered based on time:'
-  //   for(let i=0;i<numberOfAlgos;i++){
-  //     console.log(i)
-  //    document.getElementById('timerow'+i).innerHTML=tempPerformance[i].algorithm    
-  //   }
-  //   tempPerformance.sort((a,b)=>{
-  //     return(a.numberOfVisitedNodes>b.numberOfVisitedNodes) ? 1:-1
-  //   })
+  showComparison(){
+    const {performance} = this.state;
+    const {numberOfAlgos} = this.state;
+    var tempPerformance=performance;
+    tempPerformance.sort((a,b)=>{
+      return(a.time>b.time) ? 1:-1
+    })
+    // document.getElementById('efficientTName').innerHTML= 'Most efficent algorithm based on time: ';
+    // document.getElementById('efficientT').innerHTML= tempPerformance[0].algorithm; 
     
-  //   document.getElementById('spacelist').innerHTML='Algorithms ordered based on space:'
-  //   for(let i=0;i<numberOfAlgos;i++){
-  //     document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm   
+    // document.getElementById('efficientSName').innerHTML= 'Most efficent algorithm based on space: ';
+    // document.getElementById('efficientS').innerHTML=tempPerformance[0].algorithm; 
 
-  //    }   
-      
+    document.getElementById('timelist').innerHTML='Algorithms ordered based on time' 
+
+    for(let i=0;i<numberOfAlgos;i++){
+     document.getElementById('timerow'+i).innerHTML=tempPerformance[i].algorithm;    
+    }
     
-  // }
+    tempPerformance.sort((a,b)=>{
+      return(a.numberOfVisitedNodes>b.numberOfVisitedNodes) ? 1:-1
+    })
+    
+    document.getElementById('spacelist').innerHTML='Algorithms ordered based on space';
 
+    for(let i=0;i<numberOfAlgos;i++){
+      document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm;     
+    }   
+  }
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    // if(visitedNodesInOrder==null){
-    //   throw(noPathError)
-    //   this.clearWalls()
-    //   this.startVisualization()
-    // }
+    const {grid} = this.state
+    if(!visitedNodesInOrder.includes(grid[10][35])){
+      alert('No path avilable. Please try again')
+     window.location.reload()
+    }
+    console.log(visitedNodesInOrder)
     for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -201,7 +211,7 @@ export default class Grid extends Component
     var t1=performance.now()
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
-    this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length+1,nodesInShortestPathOrder.length)
+    this.recordPerofrmence('astar',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
 
 
@@ -237,22 +247,25 @@ export default class Grid extends Component
     this.setState({
       numberOfAlgos:numberOfAlgos+1
     })
+    this.setState({
+      disabledStart:false
+    })
    }
   }
-  
+
   startVisualization(){
       const {currentAlgorithm}= this.state
-      
       var algo=currentAlgorithm.pop()
-      
-     var currentAlgo= document.getElementById('currentAlgo')
+      this.setState({
+        disabledStart:true
+      })
+     var currentAlgo= document.getElementById('currentAlgo');
      if(algo!=undefined){
      currentAlgo.innerHTML= 'Current Algorithm: '+ ' ' + algo;
      }
      else{
       currentAlgo.innerHTML=''
      }
-
       if(algo=='dijsktras'){
         
         this.visualizeDijkstra()        
@@ -268,9 +281,12 @@ export default class Grid extends Component
       if(algo=='dfs'){
         this.visualizeDfs()
       }
-
       if(currentAlgorithm.length === 0){
-      
+
+        document.getElementById('table').style.display = 'inline-table';
+        document.getElementById('timeList').style.display = 'block';
+        document.getElementById('spaceList').style.display = 'block';
+
         this.displayPerformance();
       }
   }
@@ -283,12 +299,10 @@ export default class Grid extends Component
       <>
       <div className="navBar">
         <a href="http://localhost:3000/" className='onlyLeft'>  <b> Pathfinding Visualizer </b></a>
-        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Visualize!</b> </button></a>
-       
-        
+        <a>  <button  onClick={()=>this.startVisualization()}className="newTools" disabled={this.state.disabledStart}> <b>Visualize!</b> </button></a>
 	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
-          <select className="dropdown-algo" id="dropdown-algo" multiple>
+          <select className="dropdown-algo" id="dropdown-algo" multiple >
           <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras' className="algoBar"> Dijkstra's algorithm </option> 
           <option  onClick={()=>this.selectionfunction('astar')} id='astar' className="algoBar">  Astar algorithm  </option>
           <option  onClick={()=>this.selectionfunction('bfs') }id='bfs' className="algoBar">  Bfs algorithm  </option>
@@ -339,59 +353,71 @@ export default class Grid extends Component
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
-       {/* <a>  <button onClick={()=> this.showComparison()}>Show Comparison</button></a> */}
       </div>
 
-     <div id='tableContainer'> 
-      <ul > <div id='timelist'></div>
-        <li id='timerow0'></li>
-        <li id='timerow1'></li>
-        <li id='timerow2'></li>
-        <li id='timerow3'></li>
-       </ul> 
-       <ul > <div id='spacelist'></div>
-        <li id='spacerow0'></li>
-        <li id='spacerow1'></li>
-        <li id='spacerow2'></li>
-        <li id='spacerow3'></li>
-       </ul>         
-         
-        <Table>
-          <thead>
-            <tr>
-              <th id='algorithm'></th>
-              <th id='time'></th>
-              <th id='distance'></th>
-              <th id='visitedNodes'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td id='name0'></td>
-              <td id='time0'></td>
-              <td id='distance0'></td>
-              <td id='visitedNodes0'></td>
-            </tr>
-            <tr>
-              <td id='name1'></td>
-              <td id='time1'></td>
-              <td id='distance1'></td>
-              <td id='visitedNodes1'></td>
-            </tr>
-            <tr>
-              <td id='name2'></td>
-              <td id='time2'></td>
-              <td id='distance2'></td>
-              <td id='visitedNodes2'></td>
-            </tr>
-            <tr>
-              <td id='name3'></td>
-              <td id='time3'></td>
-              <td id='distance3'></td>
-              <td id='visitedNodes3'></td>
-            </tr>
-          </tbody>
-        </Table>
+      <div id='analysisContainer'>
+        <div id='tableContainer'>
+          <Table id='table'>
+              <thead>
+                <tr>
+                  <th id='algorithm'></th>
+                  <th id='time'></th>
+                  <th id='distance'></th>
+                  <th id='visitedNodes'></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id='name0'></td>
+                  <td id='time0'></td>
+                  <td id='distance0'></td>
+                  <td id='visitedNodes0'></td>
+                </tr>
+                <tr>
+                  <td id='name1'></td>
+                  <td id='time1'></td>
+                  <td id='distance1'></td>
+                  <td id='visitedNodes1'></td>
+                </tr>
+                <tr>
+                  <td id='name2'></td>
+                  <td id='time2'></td>
+                  <td id='distance2'></td>
+                  <td id='visitedNodes2'></td>
+                </tr>
+                <tr>
+                  <td id='name3'></td>
+                  <td id='time3'></td>
+                  <td id='distance3'></td>
+                  <td id='visitedNodes3'></td>
+                </tr>
+              </tbody>
+            </Table>
+        </div>
+            
+        <div id='listContainer1'>
+            <ul id='timeList' > 
+            <a  id='timelist'></a>
+            <li id='timerow0'></li>
+            <li id='timerow1'></li>
+            <li id='timerow2'></li>
+            <li id='timerow3'></li>
+            </ul> 
+        </div>
+          
+        <div id='listContainer2'>
+          <ul id='spaceList'> 
+          <a  id='spacelist'></a>
+          <li id='spacerow0'></li>
+          <li id='spacerow1'></li>
+          <li id='spacerow2'></li>
+          <li id='spacerow3'></li>
+          </ul> 
+        </div>
+             
+           
+            {/* <div><a id='efficientTName'></a><a id='efficientT'></a></div>
+            <div><a id='efficientSName'></a><a id='efficientS'></a> </div> */}   
       </div> 
 
       <div id='currentAlgo'></div>
@@ -429,6 +455,7 @@ export default class Grid extends Component
 };
 
 const getInitialGrid = () => {
+  
   const grid = []
   for (let row = 0; row < 20; row++) {
     const temp = [];
@@ -462,11 +489,4 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   newGrid[row][col] = newNode;
   return newGrid;
 };
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
+

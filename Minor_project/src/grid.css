@@ -1,46 +1,7 @@
-ul, li{
-  list-style:none;
-  list-style-type:none;
-}
-
 .grid {
   margin: 100px 0 0; 
   margin-top: 20px; 
   margin-bottom: 10px; 
-}
-
-
-table, th, td {
-  border-collapse: collapse;
-}
-
-table {
-  
-  text-transform:uppercase;
-  margin-left: auto; 
-  margin-right: auto;
-  margin-bottom: 10px;
-  width:50%;
-	border:1px solid #EEEEEE;
-  
-}
-
-th {
-  background-color: #333;
-  color: #f1f1f1;
-	text-align:center;
-}
-
-table tr:nth-child(even){
-  background-color: #b9b2b2;
-}
-
-table tr:nth-child(odd){
-  background:#EEEEEE;
-}
-
-#time0, #time1, #time2, #time3 {
-  text-transform: lowercase;
 }
 
 .navBar{
@@ -60,14 +21,13 @@ table tr:nth-child(odd){
 }
 
 .navBar a:hover{
- /* background-color: rgb(255, 0, 0) */
  color: rgb(159, 226 ,191);
- 
 }
 
 .navBar .onlyLeft {
 
-  margin-right: 700px;
+  margin-right: 550px;
+  font-size: 28px;
 }
 
 .dropDown {
@@ -85,10 +45,6 @@ table tr:nth-child(odd){
   background-color: #333333;
 }
 
-/* .dropBtn:hover{
-  background-color: rgb(93, 155, 117); ; 
-} */
-
 .dropdown-algo {
   display: none;
   position: absolute;
@@ -96,7 +52,6 @@ table tr:nth-child(odd){
   margin-top: 47px;
   text-align: left;
   padding: 14px 22px;
-  /* opacity: 75%; */
   font-size: 17px;
 }
  
@@ -126,7 +81,7 @@ table tr:nth-child(odd){
   border: none;
 }
 
- .wall .dropWall{
+.wall .dropWall{
   float: left;
   color: white;
   text-align: center;
@@ -136,7 +91,6 @@ table tr:nth-child(odd){
   background-color: #333333;
 }
 
-
 .dropdown-wall {
   display: none;
   position: absolute;
@@ -144,7 +98,7 @@ table tr:nth-child(odd){
   margin-top: 47px;
 }
  
-  .dropdown-wall a {
+.dropdown-wall a {
   float: none;
   color: black;
   padding: 3px 5px;
@@ -153,7 +107,6 @@ table tr:nth-child(odd){
   text-align: left;
   cursor: pointer;
   font-size: 15px;
-  /* opacity: 75%  ; */
 } 
 
 .dropdown-wall a:hover{
@@ -165,6 +118,7 @@ table tr:nth-child(odd){
   display: block;
   cursor: hand;
 }
+
 .algoBar{
   float: none;
   color: black;
@@ -181,11 +135,48 @@ table tr:nth-child(odd){
    color: black;
 }
 
+.dataContainer{
+  border:black;
+  border-width: 5px;
+  margin: 5px;
+}
 
 
-
-
-
+table, th, td {
+  border-collapse: collapse; 
+ }
+ 
+ table {
+   display: none;
+   text-transform:uppercase;
+   margin-left: 120px;
+   margin-top: 50px; 
+   margin-bottom: 10px;
+   border:1px solid #EEEEEE;
+   width: 800px;
+ }
+ 
+ th {
+   background-color: #333;
+   color: #f1f1f1;
+   text-align:center;
+ }
+ 
+ table tr:nth-child(even){
+   background-color: #b9b2b2;
+ }
+ 
+ table tr:nth-child(odd){
+   background:#EEEEEE;
+ }
+ 
+ #time0, #time1, #time2, #time3 {
+   text-transform: lowercase;
+ }
+ 
+ #name0, #name1, #name2, #name3 {
+   font-weight: bold;
+ }
 
 .newTools
 {
@@ -198,20 +189,56 @@ table tr:nth-child(odd){
   background-color: #333333;
   margin-left: -20px;  
  cursor: pointer;
+  
 }
   
 .newTools :hover
 {
-  background-color: #333;
-  color: rgb(159, 226 ,191);
+  background-color: rgb(141, 126, 126);
+  padding: 10px 20px;
 }
 
 #currentAlgo {
-
   text-transform: uppercase;
   font-weight: bold;
 }
 
+#efficientSName, #efficientTName {
+  font-weight: bold;
+}
 
+#efficientT, #efficientS {
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
+ul, li{
+  list-style:none;
+  list-style-type:none;
+}
 
+ul {
+  display: none;
+  background: #333;
+  padding: 20px;
+  color: white;
+  margin-left: 20px;
+}
+
+ul li {
+  background: #b9b2b2;
+  margin: 5px;
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#analysisContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#timelist, #spacelist {
+  font-weight: bold;
+}
