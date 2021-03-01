@@ -107,30 +107,31 @@ export default class Grid extends Component
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
   }
-  showComparison(){
-    const {performance} = this.state;
-    const {numberOfAlgos}= this.state
-    var tempPerformance=performance
-    tempPerformance.sort((a,b)=>{
-      return(a.time>b.time) ? 1:-1
-    })
-    document.getElementById('timelist').innerHTML='Algorithms ordered based on time:'
-    for(let i=0;i<numberOfAlgos;i++){
-      console.log(i)
-     document.getElementById('timerow'+i).innerHTML=tempPerformance[i].algorithm    
-    }
-    tempPerformance.sort((a,b)=>{
-      return(a.numberOfVisitedNodes>b.numberOfVisitedNodes) ? 1:-1
-    })
-    
-    document.getElementById('spacelist').innerHTML='Algorithms ordered based on space:'
-    for(let i=0;i<numberOfAlgos;i++){
-      document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm   
 
-     }   
+  // showComparison(){
+  //   const {performance} = this.state;
+  //   const {numberOfAlgos}= this.state
+  //   var tempPerformance=performance
+  //   tempPerformance.sort((a,b)=>{
+  //     return(a.time>b.time) ? 1:-1
+  //   })
+  //   document.getElementById('timelist').innerHTML='Algorithms ordered based on time:'
+  //   for(let i=0;i<numberOfAlgos;i++){
+  //     console.log(i)
+  //    document.getElementById('timerow'+i).innerHTML=tempPerformance[i].algorithm    
+  //   }
+  //   tempPerformance.sort((a,b)=>{
+  //     return(a.numberOfVisitedNodes>b.numberOfVisitedNodes) ? 1:-1
+  //   })
+    
+  //   document.getElementById('spacelist').innerHTML='Algorithms ordered based on space:'
+  //   for(let i=0;i<numberOfAlgos;i++){
+  //     document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm   
+
+  //    }   
       
     
-  }
+  // }
 
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -338,7 +339,7 @@ export default class Grid extends Component
           </div> 
         </div>
        <a href="http://localhost:3000/"> <b> Reset</b></a>
-       <a>  <button onClick={()=> this.showComparison()}>Show Comparison</button></a>
+       {/* <a>  <button onClick={()=> this.showComparison()}>Show Comparison</button></a> */}
       </div>
 
      <div id='tableContainer'> 
@@ -355,7 +356,7 @@ export default class Grid extends Component
         <li id='spacerow3'></li>
        </ul>         
          
-        <Table class="center">
+        <Table>
           <thead>
             <tr>
               <th id='algorithm'></th>
