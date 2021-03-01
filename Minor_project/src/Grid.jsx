@@ -22,6 +22,7 @@ export default class Grid extends Component
           currentAlgorithm: [],
           performance:[],
           numberOfAlgos:0,
+          disabledStart:true,
         };
     } 
    
@@ -129,17 +130,20 @@ export default class Grid extends Component
       document.getElementById('spacerow'+i).innerHTML=tempPerformance[i].algorithm   
 
      }   
-      
+     this.setState({
+      disabledSelection:false
+    })
     
   }
 
  
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    // if(visitedNodesInOrder==null){
-    //   throw(noPathError)
-    //   this.clearWalls()
-    //   this.startVisualization()
-    // }
+    const {grid} = this.state
+    if(!visitedNodesInOrder.includes(grid[10][35])){
+      alert('No path avilable. Please try again')
+     window.location.reload()
+    }
+    console.log(visitedNodesInOrder)
     for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -237,14 +241,18 @@ export default class Grid extends Component
     this.setState({
       numberOfAlgos:numberOfAlgos+1
     })
+    this.setState({
+      disabledStart:false
+    })
    }
   }
   
   startVisualization(){
       const {currentAlgorithm}= this.state
-      
       var algo=currentAlgorithm.pop()
-      
+      this.setState({
+        disabledStart:true
+      })
      var currentAlgo= document.getElementById('currentAlgo')
      if(algo!=undefined){
      currentAlgo.innerHTML= 'Current Algorithm: '+ ' ' + algo;
@@ -252,7 +260,7 @@ export default class Grid extends Component
      else{
       currentAlgo.innerHTML=''
      }
-
+     console.log(algo)
       if(algo=='dijsktras'){
         
         this.visualizeDijkstra()        
@@ -283,12 +291,10 @@ export default class Grid extends Component
       <>
       <div className="navBar">
         <a href="http://localhost:3000/" className='onlyLeft'>  <b> Pathfinding Visualizer </b></a>
-        <a>  <button onClick={()=>this.startVisualization()} className="newTools"> <b>Visualize!</b> </button></a>
-       
-        
+        <a>  <button  onClick={()=>this.startVisualization()}className="newTools" disabled={this.state.disabledStart}> <b>Visualize!</b> </button></a>
 	      <div className="dropDown"> 
           <label className="dropBtn"><b> Algorithms </b></label>
-          <select className="dropdown-algo" id="dropdown-algo" multiple>
+          <select className="dropdown-algo" id="dropdown-algo" multiple >
           <option onClick={()=>this.selectionfunction('dijsktras')} id='dijsktras' className="algoBar"> Dijkstra's algorithm </option> 
           <option  onClick={()=>this.selectionfunction('astar')} id='astar' className="algoBar">  Astar algorithm  </option>
           <option  onClick={()=>this.selectionfunction('bfs') }id='bfs' className="algoBar">  Bfs algorithm  </option>
@@ -428,6 +434,7 @@ export default class Grid extends Component
 };
 
 const getInitialGrid = () => {
+  
   const grid = []
   for (let row = 0; row < 20; row++) {
     const temp = [];
@@ -461,11 +468,4 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   newGrid[row][col] = newNode;
   return newGrid;
 };
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
+
