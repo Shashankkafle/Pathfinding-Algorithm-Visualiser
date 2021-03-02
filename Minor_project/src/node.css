@@ -1,7 +1,7 @@
 .node{
   width: 25px;
   height: 25px;
-  outline: 1.25px solid rgb(65, 153, 73);
+  outline: 1.25px solid rgb(63, 138, 130);
   display: inline-block;
   padding: auto;
   margin-right: 4px;  
@@ -11,7 +11,7 @@
     background-color: rgb(32, 12, 78);
   }
     
-/* .node-visited {
+.node-visited {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
@@ -55,7 +55,7 @@
       transform: scale(1);
       background-color: rgb(255, 254, 106);
     }
-  } */
+  }
 
 
 
