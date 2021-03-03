@@ -5,14 +5,11 @@ export  function generateWall1(grid)
     {
       for(var j=0;j<newGrid[i].length;j++)
       {
-        // if((Math.random())<0.1)
-        // {
-        //   newGrid[i][j].isWall= true
-        // }
-        if((newGrid[i][j].row==9)||(newGrid[i][j].row==11))
+        if((Math.random())<0.1)
         {
           newGrid[i][j].isWall= true
         }
+        
       }
     }
    return newGrid
