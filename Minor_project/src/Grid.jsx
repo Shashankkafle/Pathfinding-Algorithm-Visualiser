@@ -48,6 +48,7 @@ export default class Grid extends Component
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
   }
+
   clearGrid(){ 
     const {grid}=this.state    
     for(var i=0;i<grid.length;i++){
@@ -60,6 +61,7 @@ export default class Grid extends Component
       }
     }
   }
+
   clearWalls(){ 
     const {grid}=this.state    
     for(var i=0;i<grid.length;i++){
@@ -73,6 +75,7 @@ export default class Grid extends Component
       }
     }
   }
+
   recordPerofrmence(algo,time,numberOfVisited,lengthOfSHortestPath){
     const {performance}=this.state;
     var tempPerformance = new Object();
@@ -92,13 +95,20 @@ export default class Grid extends Component
     var colTime=document.getElementById('time')
     var colShortestDistance = document.getElementById('distance')
     var colNumberOfVisited= document.getElementById('visitedNodes')
+    var table = document.getElementById('table')
+    var originalTableValue = table.innerHTML;
     colName.innerHTML= 'algorithm' ;
     colTime.innerHTML= 'time';
     colShortestDistance.innerHTML = 'Shortest Path Length'
     colNumberOfVisited.innerHTML='Number Of Visited Nodes'
     var name=[],time=[],shrotestDistance=[],numberOfNodes=[];
+    
     for(let i=0;i<numberOfAlgos;i++){
+      console.log('i')
+      console.log(i)  
       name[i]=document.getElementById('name'+i)
+      console.log('name')
+      console.log(name[i])
       time[i]=document.getElementById('time'+i)
       shrotestDistance[i]= document.getElementById('distance'+i)
       numberOfNodes[i]=document.getElementById('visitedNodes'+i)
@@ -107,10 +117,21 @@ export default class Grid extends Component
       shrotestDistance[i].innerHTML =  performance[i].shortestPathLength.toString();
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
-    // document.getElementById('analysisContainer').style.display = 'block';
-
     this.showComparison();
-
+    if(numberOfAlgos==4){
+      
+      this.setState({
+        numberOfAlgos:0
+      })
+      console.log('number of algos');
+      console.log(numberOfAlgos);
+    }
+    let count = 5;
+    console.log('count');
+    console.log(count);
+    if(count==5){
+      table.innerHTML = originalTableValue;
+    }
   }
 
   showComparison(){
@@ -120,11 +141,6 @@ export default class Grid extends Component
     tempPerformance.sort((a,b)=>{
       return(a.time>b.time) ? 1:-1
     })
-    // document.getElementById('efficientTName').innerHTML= 'Most efficent algorithm based on time: ';
-    // document.getElementById('efficientT').innerHTML= tempPerformance[0].algorithm; 
-    
-    // document.getElementById('efficientSName').innerHTML= 'Most efficent algorithm based on space: ';
-    // document.getElementById('efficientS').innerHTML=tempPerformance[0].algorithm; 
 
     document.getElementById('timelist').innerHTML='Algorithms ordered based on time' 
 
@@ -149,12 +165,11 @@ export default class Grid extends Component
       alert('No path avilable. Please try again')
      window.location.reload()
     }
-    console.log(visitedNodesInOrder)
     for (let i=0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 20 * i);
+        }, 0.5 * i);
         return;
       }
       setTimeout(() => {
@@ -164,7 +179,7 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-visited';
         }
-      }, 20 * i);
+      }, 0.5 * i);
     }
   }
 
@@ -179,15 +194,15 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
         } 
-      }, 30 * i);
+      }, 3 * i);
       j++;
     }
     setTimeout(() => {
      this.clearGrid()
-    }, 20 * j*2);
+    }, 2 * j * 2);
     setTimeout(() => {
       this.startVisualization()
-        }, 20 * j*2);
+        }, 2 * j * 2);
     
   }
 
@@ -202,6 +217,7 @@ export default class Grid extends Component
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     this.recordPerofrmence('dijkstras',t1-t0,visitedNodesInOrder.length,nodesInShortestPathOrder.length)
   }
+
   visualizeAstar() {
     const {grid} = this.state;
     const startNode = grid[10][15];
@@ -255,6 +271,7 @@ export default class Grid extends Component
 
   startVisualization(){
       const {currentAlgorithm}= this.state
+      const {numberOfAlgos}= this.state
       var algo=currentAlgorithm.pop()
       this.setState({
         disabledStart:true
@@ -309,8 +326,6 @@ export default class Grid extends Component
           <option  onClick={()=>this.selectionfunction('dfs')} id='dfs'className="algoBar" >  Dfs algorithm   </option>
           </select> 
         </div>
-
-        <a>  <button onClick={()=>this.clearGrid()} className="newTools"> <b>Clear Grid </b> </button></a>
 
         <div className="wall"> 
           <a className="dropWall"><b> Wall </b> </a>
@@ -414,10 +429,7 @@ export default class Grid extends Component
           <li id='spacerow3'></li>
           </ul> 
         </div>
-             
-           
-            {/* <div><a id='efficientTName'></a><a id='efficientT'></a></div>
-            <div><a id='efficientSName'></a><a id='efficientS'></a> </div> */}   
+     
       </div> 
 
       <div id='currentAlgo'></div>
@@ -466,6 +478,7 @@ const getInitialGrid = () => {
   }
   return grid;
 };
+
 const createNode = (col, row) => {
   return {
     col,

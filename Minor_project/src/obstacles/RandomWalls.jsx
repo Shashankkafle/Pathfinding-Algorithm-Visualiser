@@ -1,15 +1,11 @@
-export  function generateWall1(grid)
+  export  function generateWall1(grid)
   {
     const newGrid=grid
     for(var i=0;i<newGrid.length;i++)
     {
       for(var j=0;j<newGrid[i].length;j++)
       {
-        // if((Math.random())<0.1)
-        // {
-        //   newGrid[i][j].isWall= true
-        // }
-        if((newGrid[i][j].row==9)||(newGrid[i][j].row==11))
+        if((Math.random())<0.1)
         {
           newGrid[i][j].isWall= true
         }
@@ -17,6 +13,7 @@ export  function generateWall1(grid)
     }
    return newGrid
   }
+  
   export  function generateWall2(grid)
   {
     const newGrid=grid
@@ -32,6 +29,7 @@ export  function generateWall1(grid)
     }
    return newGrid
   }
+
   export  function generateWall3(grid)
   {
     const newGrid=grid
