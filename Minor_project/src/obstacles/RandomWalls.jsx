@@ -9,6 +9,7 @@
         {
           newGrid[i][j].isWall= true
         }
+        
       }
     }
    return newGrid
