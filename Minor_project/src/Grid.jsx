@@ -95,8 +95,6 @@ export default class Grid extends Component
     var colTime=document.getElementById('time')
     var colShortestDistance = document.getElementById('distance')
     var colNumberOfVisited= document.getElementById('visitedNodes')
-    var table = document.getElementById('table')
-    var originalTableValue = table.innerHTML;
     colName.innerHTML= 'algorithm' ;
     colTime.innerHTML= 'time';
     colShortestDistance.innerHTML = 'Shortest Path Length'
@@ -104,11 +102,7 @@ export default class Grid extends Component
     var name=[],time=[],shrotestDistance=[],numberOfNodes=[];
     
     for(let i=0;i<numberOfAlgos;i++){
-      console.log('i')
-      console.log(i)  
       name[i]=document.getElementById('name'+i)
-      console.log('name')
-      console.log(name[i])
       time[i]=document.getElementById('time'+i)
       shrotestDistance[i]= document.getElementById('distance'+i)
       numberOfNodes[i]=document.getElementById('visitedNodes'+i)
@@ -118,19 +112,25 @@ export default class Grid extends Component
       numberOfNodes[i].innerHTML=performance[i].numberOfVisitedNodes.toString()
     }
     this.showComparison();
+
+    if (numberOfAlgos==1){
+      document.getElementById('table').style.marginLeft = '500px';
+      document.getElementById('timeList').style.display = 'none';
+      document.getElementById('spaceList').style.display = 'none';
+    }
+
+    if (numberOfAlgos > 1){
+      document.getElementById('table').style.marginLeft = '120px';
+      document.getElementById('timeList').style.display = 'block';
+      document.getElementById('spaceList').style.display = 'block';
+      this.showComparison();
+    }
+    
     if(numberOfAlgos==4){
       
       this.setState({
         numberOfAlgos:0
       })
-      console.log('number of algos');
-      console.log(numberOfAlgos);
-    }
-    let count = 5;
-    console.log('count');
-    console.log(count);
-    if(count==5){
-      table.innerHTML = originalTableValue;
     }
   }
 
@@ -169,7 +169,7 @@ export default class Grid extends Component
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 0.5 * i);
+        }, 20 * i);
         return;
       }
       setTimeout(() => {
@@ -179,7 +179,7 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-visited';
         }
-      }, 0.5 * i);
+      }, 20 * i);
     }
   }
 
@@ -194,15 +194,15 @@ export default class Grid extends Component
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
         } 
-      }, 3 * i);
+      }, 30 * i);
       j++;
     }
     setTimeout(() => {
      this.clearGrid()
-    }, 2 * j * 2);
+    }, 20 * j * 2);
     setTimeout(() => {
       this.startVisualization()
-        }, 2 * j * 2);
+        }, 20 * j * 2);
     
   }
 
