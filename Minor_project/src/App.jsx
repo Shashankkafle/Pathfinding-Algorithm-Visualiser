@@ -1,13 +1,12 @@
-import React from 'react';
-import Grid from './Grid';
+import React from "react";
+import Grid from "./Grid";
 
- function App() {
+function App() {
   return (
     <div className="App">
-        <Grid></Grid>
+      <Grid />
     </div>
   );
 }
 
 export default App;
-
