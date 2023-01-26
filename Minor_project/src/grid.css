@@ -1,21 +1,24 @@
 .grid {
-  margin: 100px 0 0;
+  /* margin: 100px 0 0; */
   margin-top: 20px;
   margin-bottom: 10px;
+  padding: 0px 50px;
 }
 
 .navBar {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 30px;
   background-color: #333;
-  overflow: hidden;
-  padding-bottom: 10px;
+  padding: 20px 50px;
+  height: 60px;
 }
 .navBar a {
   float: left;
   font-size: 22px;
   color: white;
   text-align: center;
-  padding: 14px 22px;
+  padding: 14px 5px;
   text-decoration: none;
   cursor: hand;
 }
@@ -25,7 +28,7 @@
 }
 
 .navBar .onlyLeft {
-  margin-right: 780px;
+  margin-right: 500px;
   font-size: 28px;
 }
 
@@ -189,7 +192,7 @@ table tr:nth-child(odd) {
   margin-top: -10px;
   color: white;
   text-align: center;
-  padding: 14px 22px;
+  padding: 14px 5px;
   font-size: 22px;
   border: none;
   background-color: #333333;
@@ -242,8 +245,8 @@ ul li {
 
 #analysisContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 #timelist,

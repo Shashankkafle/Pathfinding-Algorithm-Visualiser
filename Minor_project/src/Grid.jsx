@@ -345,117 +345,123 @@ export default class Grid extends Component {
     return (
       <>
         <div className="navBar">
-          <a href="http://localhost:3000/" className="onlyLeft">
-            {" "}
+          <a
+            style={{ display: "flex" }}
+            href="http://localhost:3000/"
+            className="onlyLeft"
+          >
             <b> Pathfinding Visualizer </b>
           </a>
-          <a>
-            {" "}
-            <button
-              onClick={() => this.startVisualization()}
-              className="newTools"
-              disabled={this.state.disabledStart}
-            >
-              {" "}
-              <b>Visualize!</b>{" "}
-            </button>
-          </a>
-          <div className="dropDown">
-            <label className="dropBtn">
-              <b> Algorithms </b>
-            </label>
-            <select className="dropdown-algo" id="dropdown-algo" multiple>
-              <option
-                onClick={() => this.selectionfunction("dijsktras")}
-                id="dijsktras"
-                className="algoBar"
+          <div style={{ display: "flex" }}>
+            <a>
+              <button
+                onClick={() => this.startVisualization()}
+                className="newTools"
+                disabled={this.state.disabledStart}
               >
-                {" "}
-                Dijkstra's algorithm{" "}
-              </option>
-              <option
-                onClick={() => this.selectionfunction("astar")}
-                id="astar"
-                className="algoBar"
-              >
-                {" "}
-                Astar algorithm{" "}
-              </option>
-              <option
-                onClick={() => this.selectionfunction("bfs")}
-                id="bfs"
-                className="algoBar"
-              >
-                {" "}
-                Bfs algorithm{" "}
-              </option>
-              <option
-                onClick={() => this.selectionfunction("dfs")}
-                id="dfs"
-                className="algoBar"
-              >
-                {" "}
-                Dfs algorithm{" "}
-              </option>
-            </select>
-          </div>
-
-          <div className="wall">
-            <a className="dropWall">
-              <b> Wall </b>{" "}
+                <b>Visualize!</b>
+              </button>
             </a>
-            <div className="dropdown-wall">
-              <a
-                onClick={() => {
-                  const { grid } = this.state;
-                  const newGrid = generateWall1(grid);
-                  this.setState({ grid: newGrid });
-                }}
-              >
-                {" "}
-                <a> Level 1</a>{" "}
-              </a>
-              <a
-                onClick={() => {
-                  const { grid } = this.state;
-                  const newGrid = generateWall2(grid);
-                  this.setState({ grid: newGrid });
-                }}
-              >
-                {" "}
-                <a> Level 2</a>{" "}
-              </a>
-              <a
-                onClick={() => {
-                  const { grid } = this.state;
-                  const newGrid = generateWall3(grid);
-                  this.setState({ grid: newGrid });
-                }}
-              >
-                {" "}
-                <a> Level 3</a>{" "}
-              </a>
-              <a
-                onClick={() => {
-                  const { grid } = this.state;
-                  const newGrid = createMaze(grid);
-                  this.setState({ grid: newGrid });
-                }}
-              >
-                {" "}
-                <a> Generate Maze</a>{" "}
-              </a>
+            <div className="dropDown">
+              <label className="dropBtn">
+                <b> Algorithms </b>
+              </label>
+              <select className="dropdown-algo" id="dropdown-algo" multiple>
+                <option
+                  onClick={() => this.selectionfunction("dijsktras")}
+                  id="dijsktras"
+                  className="algoBar"
+                >
+                  {" "}
+                  Dijkstra's algorithm{" "}
+                </option>
+                <option
+                  onClick={() => this.selectionfunction("astar")}
+                  id="astar"
+                  className="algoBar"
+                >
+                  {" "}
+                  Astar algorithm{" "}
+                </option>
+                <option
+                  onClick={() => this.selectionfunction("bfs")}
+                  id="bfs"
+                  className="algoBar"
+                >
+                  {" "}
+                  Bfs algorithm{" "}
+                </option>
+                <option
+                  onClick={() => this.selectionfunction("dfs")}
+                  id="dfs"
+                  className="algoBar"
+                >
+                  {" "}
+                  Dfs algorithm{" "}
+                </option>
+              </select>
             </div>
+
+            <div className="wall">
+              <a className="dropWall">
+                <b> Wall </b>{" "}
+              </a>
+              <div className="dropdown-wall">
+                <a
+                  onClick={() => {
+                    const { grid } = this.state;
+                    const newGrid = generateWall1(grid);
+                    this.setState({ grid: newGrid });
+                  }}
+                >
+                  {" "}
+                  <a> Level 1</a>{" "}
+                </a>
+                <a
+                  onClick={() => {
+                    const { grid } = this.state;
+                    const newGrid = generateWall2(grid);
+                    this.setState({ grid: newGrid });
+                  }}
+                >
+                  {" "}
+                  <a> Level 2</a>{" "}
+                </a>
+                <a
+                  onClick={() => {
+                    const { grid } = this.state;
+                    const newGrid = generateWall3(grid);
+                    this.setState({ grid: newGrid });
+                  }}
+                >
+                  {" "}
+                  <a> Level 3</a>{" "}
+                </a>
+                <a
+                  onClick={() => {
+                    const { grid } = this.state;
+                    const newGrid = createMaze(grid);
+                    this.setState({ grid: newGrid });
+                  }}
+                >
+                  {" "}
+                  <a> Generate Maze</a>{" "}
+                </a>
+              </div>
+            </div>
+            <a href="http://localhost:3000/">
+              {" "}
+              <b> Reset</b>
+            </a>
           </div>
-          <a href="http://localhost:3000/">
-            {" "}
-            <b> Reset</b>
-          </a>
         </div>
 
         <div id="analysisContainer">
           <div id="tableContainer">
-            <Table id="table">
+            <Table
+              id="table"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
               <thead>
                 <tr>
                   <th id="algorithm"></th>
@@ -519,7 +525,10 @@ export default class Grid extends Component {
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
-              <div key={rowIdx}>
+              <div
+                key={rowIdx}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
                 {row.map((node, nodeIdx) => {
                   const { row, col, isFinish, isStart, isWall } = node;
                   return (
