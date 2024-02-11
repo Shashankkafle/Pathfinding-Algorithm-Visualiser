@@ -81,7 +81,7 @@ export default class Grid extends Component {
 
   recordPerofrmence(algo, time, numberOfVisited, lengthOfSHortestPath) {
     const { performance } = this.state;
-    var tempPerformance = new Object();
+    var tempPerformance = {};
     tempPerformance.algorithm = algo;
     tempPerformance.time = time;
     tempPerformance.shortestPathLength = lengthOfSHortestPath;
@@ -119,7 +119,7 @@ export default class Grid extends Component {
     }
     this.showComparison();
 
-    if (numberOfAlgos == 1) {
+    if (numberOfAlgos === 1) {
       document.getElementById("table").style.marginLeft = "500px";
       document.getElementById("timeList").style.display = "none";
       document.getElementById("spaceList").style.display = "none";
@@ -132,7 +132,7 @@ export default class Grid extends Component {
       this.showComparison();
     }
 
-    if (numberOfAlgos == 4) {
+    if (numberOfAlgos === 4) {
       this.setState({
         numberOfAlgos: 0,
       });
@@ -306,30 +306,30 @@ export default class Grid extends Component {
 
   startVisualization() {
     const { currentAlgorithm } = this.state;
-    const { numberOfAlgos } = this.state;
+    // const { numberOfAlgos } = this.state;
     var algo = currentAlgorithm.pop();
     this.setState({
       disabledStart: true,
     });
     var currentAlgo = document.getElementById("currentAlgo");
-    if (algo != undefined) {
-      currentAlgo.innerHTML = "Current Algorithm: " + " " + algo;
-    } else {
-      currentAlgo.innerHTML = "";
-    }
-    if (algo == "dijsktras") {
-      this.visualizeDijkstra();
-    }
-    if (algo == "astar") {
-      this.visualizeAstar();
-    }
-    if (algo == "bfs") {
-      this.visualizeBfs();
-    }
+    if (algo !== undefined) {
+		currentAlgo.innerHTML = 'Current Algorithm: ' + ' ' + algo;
+	} else {
+		currentAlgo.innerHTML = '';
+	}
+	if (algo === 'dijsktras') {
+		this.visualizeDijkstra();
+	}
+	if (algo === 'astar') {
+		this.visualizeAstar();
+	}
+	if (algo === 'bfs') {
+		this.visualizeBfs();
+	}
 
-    if (algo == "dfs") {
-      this.visualizeDfs();
-    }
+	if (algo === 'dfs') {
+		this.visualizeDfs();
+	}
     if (currentAlgorithm.length === 0) {
       document.getElementById("table").style.display = "inline-table";
       document.getElementById("timeList").style.display = "block";
