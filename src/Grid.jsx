@@ -343,217 +343,233 @@ export default class Grid extends Component {
     const { grid, mouseIsPressed } = this.state;
 
     return (
-      <>
-        <div className="navBar">
-          <a
-            style={{ display: "flex" }}
-            href="http://localhost:3000/"
-            className="onlyLeft"
-          >
-            <b> Pathfinding Visualizer </b>
-          </a>
-          <div style={{ display: "flex" }}>
-            <a>
-              <button
-                onClick={() => this.startVisualization()}
-                className="newTools"
-                disabled={this.state.disabledStart}
-              >
-                <b>Visualize!</b>
-              </button>
-            </a>
-            <div className="dropDown">
-              <label className="dropBtn">
-                <b> Algorithms </b>
-              </label>
-              <select className="dropdown-algo" id="dropdown-algo" multiple>
-                <option
-                  onClick={() => this.selectionfunction("dijsktras")}
-                  id="dijsktras"
-                  className="algoBar"
-                >
-                  {" "}
-                  Dijkstra's algorithm{" "}
-                </option>
-                <option
-                  onClick={() => this.selectionfunction("astar")}
-                  id="astar"
-                  className="algoBar"
-                >
-                  {" "}
-                  Astar algorithm{" "}
-                </option>
-                <option
-                  onClick={() => this.selectionfunction("bfs")}
-                  id="bfs"
-                  className="algoBar"
-                >
-                  {" "}
-                  Bfs algorithm{" "}
-                </option>
-                <option
-                  onClick={() => this.selectionfunction("dfs")}
-                  id="dfs"
-                  className="algoBar"
-                >
-                  {" "}
-                  Dfs algorithm{" "}
-                </option>
-              </select>
-            </div>
+		<>
+			<div className="navBar">
+				<a
+					className="item onlyLeft"
+					style={{ display: 'flex' }}
+					href="http://localhost:3000/"
+				>
+					<b> Pathfinding Visualizer </b>
+				</a>
+				<div style={{ display: 'flex' }}>
+					<div className="item">
+						<button
+							onClick={() => this.startVisualization()}
+							className="newTools"
+							disabled={this.state.disabledStart}
+						>
+							<b>Visualize!</b>
+						</button>
+					</div>
+					<div className="dropDown">
+						<label className="dropBtn">
+							<b> Algorithms </b>
+						</label>
+						<select
+							className="dropdown-algo"
+							id="dropdown-algo"
+							multiple
+						>
+							<option
+								onClick={() =>
+									this.selectionfunction('dijsktras')
+								}
+								id="dijsktras"
+								className="algoBar"
+							>
+								{' '}
+								Dijkstra's algorithm{' '}
+							</option>
+							<option
+								onClick={() => this.selectionfunction('astar')}
+								id="astar"
+								className="algoBar"
+							>
+								{' '}
+								Astar algorithm{' '}
+							</option>
+							<option
+								onClick={() => this.selectionfunction('bfs')}
+								id="bfs"
+								className="algoBar"
+							>
+								{' '}
+								Bfs algorithm{' '}
+							</option>
+							<option
+								onClick={() => this.selectionfunction('dfs')}
+								id="dfs"
+								className="algoBar"
+							>
+								{' '}
+								Dfs algorithm{' '}
+							</option>
+						</select>
+					</div>
 
-            <div className="wall">
-              <a className="dropWall">
-                <b> Wall </b>{" "}
-              </a>
-              <div className="dropdown-wall">
-                <a
-                  onClick={() => {
-                    const { grid } = this.state;
-                    const newGrid = generateWall1(grid);
-                    this.setState({ grid: newGrid });
-                  }}
-                >
-                  {" "}
-                  <a> Level 1</a>{" "}
-                </a>
-                <a
-                  onClick={() => {
-                    const { grid } = this.state;
-                    const newGrid = generateWall2(grid);
-                    this.setState({ grid: newGrid });
-                  }}
-                >
-                  {" "}
-                  <a> Level 2</a>{" "}
-                </a>
-                <a
-                  onClick={() => {
-                    const { grid } = this.state;
-                    const newGrid = generateWall3(grid);
-                    this.setState({ grid: newGrid });
-                  }}
-                >
-                  {" "}
-                  <a> Level 3</a>{" "}
-                </a>
-                <a
-                  onClick={() => {
-                    const { grid } = this.state;
-                    const newGrid = createMaze(grid);
-                    this.setState({ grid: newGrid });
-                  }}
-                >
-                  {" "}
-                  <a> Generate Maze</a>{" "}
-                </a>
-              </div>
-            </div>
-            <a href="http://localhost:3000/">
-              {" "}
-              <b> Reset</b>
-            </a>
-          </div>
-        </div>
+					<div className="wall">
+						<div className="dropWall item">
+							<b> Wall </b>{' '}
+						</div>
+						<div className="dropdown-wall">
+							<div
+								className="item"
+								onClick={() => {
+									const { grid } = this.state;
+									const newGrid = generateWall1(grid);
+									this.setState({ grid: newGrid });
+								}}
+							>
+								{' '}
+								<div className="item"> Level 1</div>{' '}
+							</div>
+							<div
+								className="item"
+								onClick={() => {
+									const { grid } = this.state;
+									const newGrid = generateWall2(grid);
+									this.setState({ grid: newGrid });
+								}}
+							>
+								{' '}
+								<div className="item"> Level 2</div>{' '}
+							</div>
+							<div
+								className="item"
+								onClick={() => {
+									const { grid } = this.state;
+									const newGrid = generateWall3(grid);
+									this.setState({ grid: newGrid });
+								}}
+							>
+								{' '}
+								<div className="item"> Level 3</div>{' '}
+							</div>
+							<div
+								className="item"
+								onClick={() => {
+									const { grid } = this.state;
+									const newGrid = createMaze(grid);
+									this.setState({ grid: newGrid });
+								}}
+							>
+								{' '}
+								<div className="item"> Generate Maze</div>{' '}
+							</div>
+						</div>
+					</div>
+					<a className="item" href="http://localhost:3000/">
+						{' '}
+						<b> Reset</b>
+					</a>
+				</div>
+			</div>
 
-        <div id="analysisContainer">
-          <div id="tableContainer">
-            <Table
-              id="table"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <thead>
-                <tr>
-                  <th id="algorithm"></th>
-                  <th id="time"></th>
-                  <th id="distance"></th>
-                  <th id="visitedNodes"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="name0"></td>
-                  <td id="time0"></td>
-                  <td id="distance0"></td>
-                  <td id="visitedNodes0"></td>
-                </tr>
-                <tr>
-                  <td id="name1"></td>
-                  <td id="time1"></td>
-                  <td id="distance1"></td>
-                  <td id="visitedNodes1"></td>
-                </tr>
-                <tr>
-                  <td id="name2"></td>
-                  <td id="time2"></td>
-                  <td id="distance2"></td>
-                  <td id="visitedNodes2"></td>
-                </tr>
-                <tr>
-                  <td id="name3"></td>
-                  <td id="time3"></td>
-                  <td id="distance3"></td>
-                  <td id="visitedNodes3"></td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
+			<div id="analysisContainer">
+				<div id="tableContainer">
+					<Table
+						id="table"
+						style={{ display: 'flex', justifyContent: 'center' }}
+					>
+						<thead>
+							<tr>
+								<th id="algorithm"></th>
+								<th id="time"></th>
+								<th id="distance"></th>
+								<th id="visitedNodes"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id="name0"></td>
+								<td id="time0"></td>
+								<td id="distance0"></td>
+								<td id="visitedNodes0"></td>
+							</tr>
+							<tr>
+								<td id="name1"></td>
+								<td id="time1"></td>
+								<td id="distance1"></td>
+								<td id="visitedNodes1"></td>
+							</tr>
+							<tr>
+								<td id="name2"></td>
+								<td id="time2"></td>
+								<td id="distance2"></td>
+								<td id="visitedNodes2"></td>
+							</tr>
+							<tr>
+								<td id="name3"></td>
+								<td id="time3"></td>
+								<td id="distance3"></td>
+								<td id="visitedNodes3"></td>
+							</tr>
+						</tbody>
+					</Table>
+				</div>
 
-          <div id="listContainer1">
-            <ul id="timeList">
-              <a id="timelist"></a>
-              <li id="timerow0"></li>
-              <li id="timerow1"></li>
-              <li id="timerow2"></li>
-              <li id="timerow3"></li>
-            </ul>
-          </div>
+				<div id="listContainer1">
+					<ul id="timeList">
+						<div className="item" id="timelist"></div>
+						<li id="timerow0"></li>
+						<li id="timerow1"></li>
+						<li id="timerow2"></li>
+						<li id="timerow3"></li>
+					</ul>
+				</div>
 
-          <div id="listContainer2">
-            <ul id="spaceList">
-              <a id="spacelist"></a>
-              <li id="spacerow0"></li>
-              <li id="spacerow1"></li>
-              <li id="spacerow2"></li>
-              <li id="spacerow3"></li>
-            </ul>
-          </div>
-        </div>
+				<div id="listContainer2">
+					<ul id="spaceList">
+						<div id="spacelist"></div>
+						<li id="spacerow0"></li>
+						<li id="spacerow1"></li>
+						<li id="spacerow2"></li>
+						<li id="spacerow3"></li>
+					</ul>
+				</div>
+			</div>
 
-        <div id="currentAlgo"></div>
+			<div id="currentAlgo"></div>
 
-        <div className="grid">
-          {grid.map((row, rowIdx) => {
-            return (
-              <div
-                key={rowIdx}
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                {row.map((node, nodeIdx) => {
-                  const { row, col, isFinish, isStart, isWall } = node;
-                  return (
-                    <Node
-                      key={nodeIdx}
-                      col={col}
-                      isFinish={isFinish}
-                      isStart={isStart}
-                      isWall={isWall}
-                      mouseIsPressed={mouseIsPressed}
-                      onMouseDown={(row, col) => this.handleMouseDown(row, col)}
-                      onMouseEnter={(row, col) =>
-                        this.handleMouseEnter(row, col)
-                      }
-                      onMouseUp={() => this.handleMouseUp()}
-                      row={row}
-                    ></Node>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </>
-    );
+			<div className="grid">
+				{grid.map((row, rowIdx) => {
+					return (
+						<div
+							key={rowIdx}
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+							}}
+						>
+							{row.map((node, nodeIdx) => {
+								const { row, col, isFinish, isStart, isWall } =
+									node;
+								return (
+									<Node
+										key={nodeIdx}
+										col={col}
+										isFinish={isFinish}
+										isStart={isStart}
+										isWall={isWall}
+										mouseIsPressed={mouseIsPressed}
+										onMouseDown={(row, col) =>
+											this.handleMouseDown(row, col)
+										}
+										onMouseEnter={(row, col) =>
+											this.handleMouseEnter(row, col)
+										}
+										onMouseUp={() => this.handleMouseUp()}
+										row={row}
+									></Node>
+								);
+							})}
+						</div>
+					);
+				})}
+			</div>
+		</>
+	);
   }
 }
 

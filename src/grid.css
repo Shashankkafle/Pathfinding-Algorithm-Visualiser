@@ -13,7 +13,7 @@
   padding: 20px 50px;
   height: 60px;
 }
-.navBar a {
+.navBar .item {
   float: left;
   font-size: 22px;
   color: white;
@@ -23,7 +23,7 @@
   cursor: hand;
 }
 
-.navBar a:hover {
+.navBar .item:hover {
   color: rgb(159, 226, 191);
 }
 
@@ -100,7 +100,7 @@
   margin-top: 47px;
 }
 
-.dropdown-wall a {
+.dropdown-wall .item {
   float: none;
   color: black;
   padding: 3px 5px;
@@ -111,7 +111,7 @@
   font-size: 15px;
 }
 
-.dropdown-wall a:hover {
+.dropdown-wall .item:hover {
   background-color: rgb(94, 94, 116);
   color: black;
 }
