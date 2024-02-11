@@ -313,7 +313,7 @@ export default class Grid extends Component {
     });
     var currentAlgo = document.getElementById("currentAlgo");
     if (algo !== undefined) {
-		currentAlgo.innerHTML = 'Current Algorithm: ' + ' ' + algo;
+		currentAlgo.innerHTML = 'Current Algorithm: ' + algo;
 	} else {
 		currentAlgo.innerHTML = '';
 	}
